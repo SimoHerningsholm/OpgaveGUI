@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace OpgaveGUIAfsluttende.UserControls
 {
     /// <summary>
-    /// Interaction logic for MedarbejderFormFelt.xaml
+    /// Interaction logic for CreateEmployeeForm.xaml
     /// </summary>
-    public partial class MedarbejderFormFelt : UserControl
+    public partial class CreateEmployeeForm : UserControl
     {
-        public MedarbejderFormFelt()
+        public CreateEmployeeForm()
         {
             InitializeComponent();
+        }
+
+        private void CreateEmployee_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

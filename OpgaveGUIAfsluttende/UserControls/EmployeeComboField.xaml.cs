@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace OpgaveGUIAfsluttende.UserControls
 {
     /// <summary>
-    /// Interaction logic for MedarbejderOpretUC.xaml
+    /// Interaction logic for EmployeeComboField.xaml
     /// </summary>
-    public partial class MedarbejderOpretUC : UserControl
+    public partial class EmployeeComboField : UserControl
     {
-        public MedarbejderOpretUC()
+        public EmployeeComboField()
         {
             InitializeComponent();
+        }
+
+        private void employeeComboField_GotFocus(object sender, RoutedEventArgs e)
+        {
+            employeeComboFieldLabel.FontWeight = FontWeights.Bold;
+        }
+
+        private void employeeComboField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            employeeComboFieldLabel.FontWeight = FontWeights.Normal;
         }
     }
 }
