@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Label x:Name="employeeTextFieldLabel" Content="default" Width="auto" Height="30" />
-            <TextBox x:Name="employeeTextField" Width="200" Height="30" GotFocus="employeeTextField_GotFocus" LostFocus="employeeTextField_LostFocus" />
-        </StackPanel>
+        <DockPanel>
+            <Label x:Name="employeeTextFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <TextBox x:Name="employeeTextField" Width="200" Height="30" GotFocus="employeeTextField_GotFocus" LostFocus="employeeTextField_LostFocus" HorizontalAlignment="Right" />
+        </DockPanel>
     </Grid>
 </UserControl>

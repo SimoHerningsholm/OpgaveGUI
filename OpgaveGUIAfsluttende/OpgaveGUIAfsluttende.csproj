@@ -58,8 +58,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomControls\CreateEmployee.cs" />
-    <Compile Include="UserControls\CreateEmployeeForm.xaml.cs">
-      <DependentUpon>CreateEmployeeForm.xaml</DependentUpon>
+    <Compile Include="UserControls\CreateEmployeeFormField.xaml.cs">
+      <DependentUpon>CreateEmployeeFormField.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\EmployeeComboField.xaml.cs">
       <DependentUpon>EmployeeComboField.xaml</DependentUpon>
@@ -86,7 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\CreateEmployeeForm.xaml">
+    <Page Include="UserControls\CreateEmployeeFormField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

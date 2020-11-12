@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Label x:Name="employeeDateFieldLabel" Content="default" Width="auto" Height="30" />
-            <DatePicker x:Name="employeeDateField" Width="200" Height="30" GotFocus="employeeDateField_GotFocus" LostFocus="employeeDateField_LostFocus" />
-        </StackPanel>
+        <DockPanel>
+            <Label x:Name="employeeDateFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <DatePicker x:Name="employeeDateField" Width="200" Height="30" GotFocus="employeeDateField_GotFocus" LostFocus="employeeDateField_LostFocus" HorizontalAlignment="Right"/>
+        </DockPanel>
     </Grid>
 </UserControl>
