@@ -32,12 +32,12 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         public void setEmployeeFieldLabels()
         {
-            EmployeeName.employeeTextFieldLabel.Content = "Name";
-            EmployeeAddress.employeeTextFieldLabel.Content = "Address";
-            EmployeeZipCode.employeeTextFieldLabel.Content = "Zipcode";
-            EmployeeBirthDay.employeeDateFieldLabel.Content = "Birthday";
-            EmployeeCompany.employeeComboFieldLabel.Content = "Company";
-            EmployeeDepartment.employeeComboFieldLabel.Content = "Department";
+            EmployeeName.employeeTextFieldLabel.Content = "Name:";
+            EmployeeAddress.employeeTextFieldLabel.Content = "Address:";
+            EmployeeZipCode.employeeTextFieldLabel.Content = "Zipcode:";
+            EmployeeBirthDay.employeeDateFieldLabel.Content = "Birthday:";
+            EmployeeCompany.employeeComboFieldLabel.Content = "Company:";
+            EmployeeDepartment.employeeComboFieldLabel.Content = "Department:";
         }
     }
 }

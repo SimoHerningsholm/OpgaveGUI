@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Create omployee form" HorizontalAlignment="center"></TextBlock>
+            <TextBlock Text="Create omployee form" FontSize="25" HorizontalAlignment="center"></TextBlock>
             <UserControls:EmployeeTextField x:Name="EmployeeName" Height="35" Width="300"/>
             <UserControls:EmployeeTextField x:Name="EmployeeAddress" Height="35" Width="300"/>
             <UserControls:EmployeeTextField x:Name="EmployeeZipCode" Height="35" Width="300"/>

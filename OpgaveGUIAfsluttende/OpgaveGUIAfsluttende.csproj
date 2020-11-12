@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomControls\CreateEmployee.cs" />
+    <Compile Include="CustomControls\QueryEmployee.cs" />
     <Compile Include="UserControls\CreateEmployeeFormField.xaml.cs">
       <DependentUpon>CreateEmployeeFormField.xaml</DependentUpon>
     </Compile>
@@ -69,6 +70,9 @@
     </Compile>
     <Compile Include="UserControls\EmployeeTextField.xaml.cs">
       <DependentUpon>EmployeeTextField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ViewEmployeeFormField.xaml.cs">
+      <DependentUpon>ViewEmployeeFormField.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\EmployeeTextField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ViewEmployeeFormField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
