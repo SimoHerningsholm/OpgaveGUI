@@ -2,7 +2,7 @@
 
 namespace CLDB
 {
-    public class Class1
+    public class MedarbejderDataHandler
     {
     }
 }

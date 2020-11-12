@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpgaveGUIAfsluttende
+namespace OpgaveGUIAfsluttende.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MedarbejderOpretUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MedarbejderOpretUC : UserControl
     {
-        public MainWindow()
+        public MedarbejderOpretUC()
         {
             InitializeComponent();
         }
-
     }
 }

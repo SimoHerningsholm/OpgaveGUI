@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OpgaveGUIAfsluttende
+namespace OpgaveGUIAfsluttende.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MedarbejderFormFelt.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MedarbejderFormFelt : UserControl
     {
-        public MainWindow()
+        public MedarbejderFormFelt()
         {
             InitializeComponent();
         }
-
     }
 }
