@@ -14,14 +14,20 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Opgave GUI Afsluttende" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Image Grid.Row="0" x:Name="LogoPicture" Source="Pictures/Logo.png"  HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <Frame NavigationUIVisibility="Hidden" x:Name="contentFrame" Content="Frame" Grid.Row="1" Width="800"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="viewEmployees" Content="View employees" Width="200" Click="ViewEmployees_Click"  />
-            <Button x:Name="createEmployees" Content="Create employees" Width="200" Click="CreateEmployees_Click"/>
-            <Button x:Name="updateEmployees" Content="Update employees" Width="200"/>
-            <Button x:Name="deleteEmployees" Content="Delete employees" Width="200"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="610"/>
+                <ColumnDefinition Width="180" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Background="#CBD7C4" Text="Opgave GUI Afsluttende" Width="610" Foreground="#57102A" FontSize="30" FontWeight="bold" Height="50" VerticalAlignment="Center"/>
+            <Image Grid.Column="1" x:Name="LogoPicture" Width="180" Height="50" Source="Pictures/Logo2.png" VerticalAlignment="Center" />
+        </Grid>
+        <Frame NavigationUIVisibility="Hidden" x:Name="contentFrame" Content="Frame" Grid.Row="1" Width="800" Grid.ColumnSpan="2" Margin="0,0,-8,0"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="-4,0">
+            <Button Style="{StaticResource menuButton}" x:Name="viewEmployees" Content="View employees" Width="200" Click="ViewEmployees_Click"  />
+            <Button Style="{StaticResource menuButton}" x:Name="createEmployees" Content="Create employees" Width="200" Click="CreateEmployees_Click"/>
+            <Button Style="{StaticResource menuButton}" x:Name="updateEmployees" Content="Update employees" Width="200"/>
+            <Button Style="{StaticResource menuButton}" x:Name="deleteEmployees" Content="Delete employees" Width="200"/>
         </StackPanel>
     </Grid>
 </Window>

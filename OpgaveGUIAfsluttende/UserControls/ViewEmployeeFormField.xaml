@@ -12,7 +12,7 @@
             <RowDefinition Height="35" />
             <RowDefinition Height="315" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="View employees" HorizontalAlignment="Center" FontSize="25"></TextBlock>
+        <TextBlock Style="{StaticResource textBlockStyle}" Grid.Row="0" Text="View employees"></TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="480" />
@@ -20,16 +20,15 @@
             </Grid.ColumnDefinitions>
             <DataGrid Grid.Column="0" x:Name="EmployeeViewerGrid" Width="480" />
             <StackPanel Grid.Column="1">
-                <ComboBox x:Name="QueryOptionsCombo"  Width="130" SelectionChanged="QueryOptionsCombo_SelectionChanged">
+                <ComboBox Style="{StaticResource comboStyles}" x:Name="QueryOptionsCombo"  Width="130" SelectionChanged="QueryOptionsCombo_SelectionChanged">
                     <ComboBoxItem Content="Employee Id"></ComboBoxItem>
                     <ComboBoxItem Content="Company Id"></ComboBoxItem>
                     <ComboBoxItem Content="Department Id"></ComboBoxItem>
                     <ComboBoxItem Content="Boss Id"></ComboBoxItem>
                 </ComboBox>
-                <ListBox x:Name="QueryOptionResultList" Height="270" Width="130"/>
-                <custom:QueryEmployee Content="Query employee" Height="20" Width="130" Click="QueryEmployee_Click"/>
+                <ListBox x:Name="QueryOptionResultList" Height="255" Width="130"/>
+                <custom:QueryEmployee Content="Query employee"  Width="130" Click="QueryEmployee_Click"/>
             </StackPanel>
         </Grid>
-        <Label x:Name="testlabel" Content="Label" HorizontalAlignment="Left" Margin="549,9,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

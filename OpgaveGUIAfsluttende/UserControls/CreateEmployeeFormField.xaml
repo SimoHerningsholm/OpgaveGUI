@@ -10,13 +10,13 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Create omployee form" FontSize="25" HorizontalAlignment="center"></TextBlock>
+            <TextBlock Style="{StaticResource textBlockStyle}" Text="Create employee form"  Width="300" Height="30"></TextBlock>
             <UserControls:EmployeeTextField x:Name="EmployeeName" Height="35" Width="300"/>
             <UserControls:EmployeeTextField x:Name="EmployeeAddress" Height="35" Width="300"/>
             <UserControls:EmployeeTextField x:Name="EmployeeZipCode" Height="35" Width="300"/>
             <UserControls:EmployeeDateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
-            <UserControls:EmployeeComboField x:Name="EmployeeCompany" Height="35" Width="300"/>
-            <UserControls:EmployeeComboField x:Name="EmployeeDepartment" Height="35" Width="300"/>
+            <UserControls:EmployeeComboField x:Name="EmployeeCompany"  Height="35" Width="300" EmployeeComboFieldChanged="EmployeeCompany_EmployeeComboFieldChanged"/>
+            <UserControls:EmployeeComboField x:Name="EmployeeDepartment" Height="35" Width="300" Visibility="Hidden"/>
             <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click"/>
             <Label x:Name="statusLabel"></Label>
         </StackPanel>

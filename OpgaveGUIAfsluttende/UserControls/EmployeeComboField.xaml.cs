@@ -21,25 +21,32 @@ namespace OpgaveGUIAfsluttende.UserControls
     public partial class EmployeeComboField : UserControl
     {
         public bool selectedChanged;
+        //Laver en eventhandler der skal modtage comboboks selectionchanged event
+        public event EventHandler EmployeeComboFieldChanged;
         public EmployeeComboField()
         {
             InitializeComponent();
-            selectedChanged = false;
+            //Hvis selection på comboboksen ændre sig, skal employeeComboFieldSelectionChanged metoden eksekveres.
+            this.employeeComboField.SelectionChanged += new SelectionChangedEventHandler(this.employeeComboFieldSelectionChanged);
         }
-
+        protected void employeeComboFieldSelectionChanged(object sender, EventArgs e)
+        {
+            //Eksekveres denne metode eksekveres eventet såfremt eventet er sat
+            if (EmployeeComboFieldChanged != null)
+            {
+                EmployeeComboFieldChanged(sender, e);
+            }
+        }
         private void employeeComboField_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Modtager comboboks fokus skal fontweight på label være bold
             employeeComboFieldLabel.FontWeight = FontWeights.Bold;
         }
 
         private void employeeComboField_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Mister comboboks fokus skal fontweight på label være normal
             employeeComboFieldLabel.FontWeight = FontWeights.Normal;
-        }
-
-        private void EmployeeComboField_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedChanged = true;
         }
     }
 }

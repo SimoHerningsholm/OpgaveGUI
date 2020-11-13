@@ -12,27 +12,7 @@ namespace CLDB
         private static bool firstLoad = false;
         public EmployeeDataHandler()
         {
-            testEmployees = new List<Employee>();
-            if(firstLoad == false)
-            {
-                testEmployees = fillemployees();
-            }
-        }
-        public async Task<List<Employee>> getEmployees()
-        {
-            return testEmployees;
-        }
-        public async Task<Employee> getEmployee()
-        {
-            return testEmployees[0];
-        }
-        public async void createEmployee(Employee employee)
-        {
-            testEmployees.Add(employee);
-        }
-        private List<Employee> fillemployees()
-        {
-            List<Employee>fillerEmployees = new List<Employee>()
+            testEmployees = new List<Employee>()
             {
                 new Employee() {Id=1, Name = "Kurt", Address = "Kurtstreet 3", BirthDay = new DateTime(1980, 12, 24), Company = "FunnyINC", Department = "Comedy", ZipCode = 8000 },
                 new Employee() {Id=2, Name = "Benny", Address = "Bennystreet 3", BirthDay = new DateTime(1980, 11, 24), Company = "CircusArena", Department = "Acrobatics", ZipCode = 8700 },
@@ -45,7 +25,18 @@ namespace CLDB
                 new Employee() {Id=9, Name = "Lone", Address = "Lonesstreet 3", BirthDay = new DateTime(1977, 12, 24), Company = "ToysRUs", Department = "Management", ZipCode = 1500 },
                 new Employee() {Id=10, Name = "Magnus", Address = "Magnusstreet 3", BirthDay = new DateTime(1988, 12, 24), Company = "FunnyINC", Department = "Management", ZipCode = 8400 }
             };
-            return fillerEmployees;
+        }
+        public async Task<List<Employee>> getEmployees()
+        {
+            return testEmployees;
+        }
+        public async Task<Employee> getEmployee()
+        {
+            return testEmployees[0];
+        }
+        public async void createEmployee(Employee employee)
+        {
+            testEmployees.Add(employee);
         }
     }
 }

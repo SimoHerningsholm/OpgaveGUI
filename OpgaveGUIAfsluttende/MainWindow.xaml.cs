@@ -23,6 +23,8 @@ namespace OpgaveGUIAfsluttende
         public MainWindow()
         {
             InitializeComponent();
+            FrontPage frontpg = new FrontPage();
+            contentFrame.Navigate(frontpg);
         }
 
         private void CreateEmployees_Click(object sender, RoutedEventArgs e)

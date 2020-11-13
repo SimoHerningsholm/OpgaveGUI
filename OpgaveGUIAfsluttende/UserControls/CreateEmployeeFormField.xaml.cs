@@ -23,6 +23,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     public partial class CreateEmployeeFormField : UserControl
     {
         private EmployeeRepository empRep;
+        
         public CreateEmployeeFormField()
         {
             InitializeComponent();
@@ -81,6 +82,11 @@ namespace OpgaveGUIAfsluttende.UserControls
             EmployeeDepartment.employeeComboField.Items.Add("Acrobatics");
             EmployeeDepartment.employeeComboField.Items.Add("ToyProduction");
             EmployeeDepartment.employeeComboField.Items.Add("Management");
+        }
+        private void EmployeeCompany_EmployeeComboFieldChanged(object sender, EventArgs e)
+        {
+            //Er der valgt et firma sættes employeedepartment comboboks til at være synlig så man kan vælge afdeling
+            EmployeeDepartment.Visibility = Visibility.Visible;
         }
     }
 }

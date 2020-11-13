@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <Label x:Name="employeeComboFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
-            <ComboBox x:Name="employeeComboField" Width="200" Height="30" GotFocus="employeeComboField_GotFocus" LostFocus="employeeComboField_LostFocus" HorizontalAlignment="Right" SelectionChanged="EmployeeComboField_SelectionChanged" />
+            <ComboBox Style="{StaticResource comboStyles}" x:Name="employeeComboField" Width="200" Height="30" GotFocus="employeeComboField_GotFocus" LostFocus="employeeComboField_LostFocus" HorizontalAlignment="Right" />
         </DockPanel>
     </Grid>
 </UserControl>
