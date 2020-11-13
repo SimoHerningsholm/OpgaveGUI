@@ -7,19 +7,12 @@
         <Setter Property = "Background" Value = "LightSalmon" />
         <Setter Property = "Foreground" Value = "Blue"/>
         <Setter Property= "Width" Value="auto"/>
-        <Setter Property= "Height" Value="300"/>
+        <Setter Property= "Height" Value="30"/>
     </Style>
-
-    <Style TargetType="{x:Type local:QueryEmployee}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:QueryEmployee}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style TargetType = "{x:Type local:QueryEmployee}" BasedOn = "{StaticResource {x:Type Button}}">
+        <Setter Property = "Background" Value = "LightSalmon" />
+        <Setter Property = "Foreground" Value = "Blue"/>
+        <Setter Property= "Width" Value="auto"/>
+        <Setter Property= "Height" Value="30"/>
     </Style>
 </ResourceDictionary>

@@ -25,5 +25,16 @@ namespace OpgaveGUIAfsluttende
             InitializeComponent();
         }
 
+        private void CreateEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            CreateEmployeePage createPage = new CreateEmployeePage();
+            contentFrame.Navigate(createPage);
+        }
+
+        private void ViewEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            ViewEmployeePage viewPage = new ViewEmployeePage();
+            contentFrame.Navigate(viewPage);
+        }
     }
 }

@@ -12,16 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CLBL;
-using CLModels;
 
 namespace OpgaveGUIAfsluttende
 {
-    public class QueryEmployee : Button
+    /// <summary>
+    /// Interaction logic for ViewEmployeePage.xaml
+    /// </summary>
+    public partial class ViewEmployeePage : Page
     {
-        static QueryEmployee()
+        public ViewEmployeePage()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(QueryEmployee), new FrameworkPropertyMetadata(typeof(QueryEmployee)));
+            InitializeComponent();
         }
     }
 }

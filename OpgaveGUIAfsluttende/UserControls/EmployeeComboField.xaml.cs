@@ -20,9 +20,11 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class EmployeeComboField : UserControl
     {
+        public bool selectedChanged;
         public EmployeeComboField()
         {
             InitializeComponent();
+            selectedChanged = false;
         }
 
         private void employeeComboField_GotFocus(object sender, RoutedEventArgs e)
@@ -33,6 +35,11 @@ namespace OpgaveGUIAfsluttende.UserControls
         private void employeeComboField_LostFocus(object sender, RoutedEventArgs e)
         {
             employeeComboFieldLabel.FontWeight = FontWeights.Normal;
+        }
+
+        private void EmployeeComboField_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedChanged = true;
         }
     }
 }

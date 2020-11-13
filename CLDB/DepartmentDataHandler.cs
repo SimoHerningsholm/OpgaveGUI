@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CLBL
+namespace CLDB
 {
-    class MedarbejderRepository
+    class DepartmentDataHandler
     {
     }
 }

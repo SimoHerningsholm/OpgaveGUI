@@ -2,7 +2,7 @@
 
 namespace CLBL
 {
-    public class FirmaRepository
+    public class CompanyRepository
     {
     }
 }

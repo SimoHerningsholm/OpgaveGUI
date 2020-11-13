@@ -4,7 +4,8 @@ using System.Text;
 
 namespace CLDB
 {
-    class AfdelingDataHandler
+    class CompanyDataHandler
     {
+
     }
 }

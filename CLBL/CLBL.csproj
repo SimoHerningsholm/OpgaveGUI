@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CLDB\CLDB.csproj" />
   </ItemGroup>
 
 </Project>

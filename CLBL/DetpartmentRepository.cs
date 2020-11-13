@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CLDB
+namespace CLBL
 {
-    class FirmaRepositoryDataHandler
+    class DetpartmentRepository
     {
     }
 }

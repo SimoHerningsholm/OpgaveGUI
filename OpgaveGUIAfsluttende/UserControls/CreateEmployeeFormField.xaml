@@ -17,7 +17,8 @@
             <UserControls:EmployeeDateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
             <UserControls:EmployeeComboField x:Name="EmployeeCompany" Height="35" Width="300"/>
             <UserControls:EmployeeComboField x:Name="EmployeeDepartment" Height="35" Width="300"/>
-            <custom:CreateEmployee Content="Create employee" Height="20" Click="CreateEmployee_Click"/>
+            <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click"/>
+            <Label x:Name="statusLabel"></Label>
         </StackPanel>
     </Grid>
 </UserControl>
