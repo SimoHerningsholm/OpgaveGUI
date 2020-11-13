@@ -62,11 +62,20 @@
     </Compile>
     <Compile Include="CustomControls\CreateEmployee.cs" />
     <Compile Include="CustomControls\QueryEmployee.cs" />
+    <Compile Include="DeleteEmployeePage.xaml.cs">
+      <DependentUpon>DeleteEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FrontPage.xaml.cs">
       <DependentUpon>FrontPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateEmployeePage.xaml.cs">
+      <DependentUpon>UpdateEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CreateEmployeeFormField.xaml.cs">
       <DependentUpon>CreateEmployeeFormField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DeleteEmployeeFormField.xaml.cs">
+      <DependentUpon>DeleteEmployeeFormField.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\EmployeeComboField.xaml.cs">
       <DependentUpon>EmployeeComboField.xaml</DependentUpon>
@@ -77,6 +86,9 @@
     <Compile Include="UserControls\EmployeeTextField.xaml.cs">
       <DependentUpon>EmployeeTextField.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UpdateEmployeeFormField.xaml.cs">
+      <DependentUpon>UpdateEmployeeFormField.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ViewEmployeeFormField.xaml.cs">
       <DependentUpon>ViewEmployeeFormField.xaml</DependentUpon>
     </Compile>
@@ -84,6 +96,10 @@
       <DependentUpon>ViewEmployeePage.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,7 +123,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UpdateEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\CreateEmployeeFormField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DeleteEmployeeFormField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\EmployeeTextField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UpdateEmployeeFormField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

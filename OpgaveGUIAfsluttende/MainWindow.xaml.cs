@@ -30,16 +30,30 @@ namespace OpgaveGUIAfsluttende
 
         private void CreateEmployees_Click(object sender, RoutedEventArgs e)
         {
-            //Ved klik på createemployee navigeres der til createsiden
+            //Ved klik på createemployees navigeres der til createsiden
             CreateEmployeePage createPage = new CreateEmployeePage();
             contentFrame.Navigate(createPage);
         }
 
         private void ViewEmployees_Click(object sender, RoutedEventArgs e)
         {
-            //ved klik på viewemployee navigeres der til viewsiden
+            //ved klik på viewemployees navigeres der til viewsiden
             ViewEmployeePage viewPage = new ViewEmployeePage();
             contentFrame.Navigate(viewPage);
+        }
+
+        private void updateEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            //ved klik på updateemployees navigeres der til updatesiden
+            UpdateEmployeePage updatePage = new UpdateEmployeePage();
+            contentFrame.Navigate(updatePage);
+        }
+
+        private void deleteEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            //ved klik på deleteemployees navigeres der til deletesiden
+            DeleteEmployeePage deletePage = new DeleteEmployeePage();
+            contentFrame.Navigate(deletePage);
         }
     }
 }

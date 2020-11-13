@@ -32,8 +32,8 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="-4,0">
             <Button Style="{StaticResource menuButton}" x:Name="viewEmployees" Content="View employees" Width="200" Click="ViewEmployees_Click"  />
             <Button Style="{StaticResource menuButton}" x:Name="createEmployees" Content="Create employees" Width="200" Click="CreateEmployees_Click"/>
-            <Button Style="{StaticResource menuButton}" x:Name="updateEmployees" Content="Update employees" Width="200"/>
-            <Button Style="{StaticResource menuButton}" x:Name="deleteEmployees" Content="Delete employees" Width="200"/>
+            <Button Style="{StaticResource menuButton}" x:Name="updateEmployees" Content="Update employees" Width="200" Click="updateEmployees_Click"/>
+            <Button Style="{StaticResource menuButton}" x:Name="deleteEmployees" Content="Delete employees" Width="200" Click="deleteEmployees_Click"/>
         </StackPanel>
     </Grid>
 </Window>
