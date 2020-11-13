@@ -3,18 +3,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:OpgaveGUIAfsluttende"
     xmlns:custom="clr-namespace:OpgaveGUIAfsluttende">
+    <!-- opretter style for createemployee button usercontrol som basere sig paa / arver fra en almindelig button-->
     <Style TargetType = "{x:Type local:CreateEmployee}" BasedOn = "{StaticResource {x:Type Button}}">
-        <Setter Property = "Background" Value = "#9CB290" />
+        <!-- saetter diverse properties-->
         <Setter Property = "Foreground" Value = "#57102A"/>
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property= "Width" Value="auto"/>
         <Setter Property= "Height" Value="40"/>
+        <!-- For at faa knappen til at overskrive mouseovereffekt paa almindelig button skal der rettes paa selve button templaten-->
         <Setter Property="Template">
             <Setter.Value>
+                <!-- Saetter control template til at vaere standard button (den der skal overskrives) -->
                 <ControlTemplate TargetType="{x:Type Button}">
+                    <!-- Laver ramme omkring knappen hvori knappens indhol ligger (goer saa tekst vises)-->
                     <Border Name="Border" Background="#9CB290">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
                     </Border>
+                    <!-- Laver mouseover event der saetter en ny baggrundsfarve ved mouseover-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="#CBD7C4" />
@@ -24,18 +29,23 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style TargetType = "{x:Type local:QueryEmployee}" BasedOn = "{StaticResource {x:Type Button}}">
-        <Setter Property = "Background" Value = "#9CB290" />
+        <!-- saetter diverse properties -->
         <Setter Property = "Foreground" Value = "#57102A"/>
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property= "Width" Value="auto"/>
         <Setter Property= "Height" Value="40"/>
+        <!-- For at faa knappen til at overskrive mouseovereffekt paa almindelig button skal der rettes paa selve button templaten-->
         <Setter Property="Template">
             <Setter.Value>
+                <!-- Saetter control template til at vaere standard button (den der skal overskrives) -->
                 <ControlTemplate TargetType="{x:Type Button}">
+                    <!-- Laver ramme omkring knappen hvori knappens indhol ligger (goere saa tekst vises)-->
                     <Border Name="Border" Background="#9CB290">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
                     </Border>
+                    <!-- Laver mouseover event der saetter en ny baggrundsfarve ved mouseover-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="#CBD7C4" />

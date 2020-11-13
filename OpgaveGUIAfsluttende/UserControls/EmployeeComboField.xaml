@@ -7,8 +7,11 @@
              mc:Ignorable="d"
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
+        <!-- Opsætter label og comboboks med dockpanel da stackpanel med horizontal orientation ikke opfangede alignment properties-->
         <DockPanel>
-            <Label x:Name="employeeComboFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <!-- Laver en label der stiles af labelstyle fra app resources-->
+            <Label Style="{StaticResource labelStyle}" x:Name="employeeComboFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <!-- Laver en comboboks som stiles af combostyle fra app resources. Derudover har den focus events associeret med henblik på at fremhæve label ved focus-->
             <ComboBox Style="{StaticResource comboStyles}" x:Name="employeeComboField" Width="200" Height="30" GotFocus="employeeComboField_GotFocus" LostFocus="employeeComboField_LostFocus" HorizontalAlignment="Right" />
         </DockPanel>
     </Grid>

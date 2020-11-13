@@ -8,10 +8,11 @@ namespace CLDB
 {
     public class EmployeeDataHandler
     {
+        //Deklerere liste af testemployees
         List<Employee> testEmployees;
-        private static bool firstLoad = false;
         public EmployeeDataHandler()
         {
+            //Generere en liste af employee objekter der kan simulere database data i frontend
             testEmployees = new List<Employee>()
             {
                 new Employee() {Id=1, Name = "Kurt", Address = "Kurtstreet 3", BirthDay = new DateTime(1980, 12, 24), Company = "FunnyINC", Department = "Comedy", ZipCode = 8000 },
@@ -28,15 +29,20 @@ namespace CLDB
         }
         public async Task<List<Employee>> getEmployees()
         {
+            //Indtil der kommer databasefunktionalitet returneres listen bare til den der kalder metoden
             return testEmployees;
         }
         public async Task<Employee> getEmployee()
         {
+            //Indtil der kommer databasefunktionalitet returneres den første employee fra listen
             return testEmployees[0];
         }
-        public async void createEmployee(Employee employee)
+        public async Task<bool> createEmployee(Employee employee)
         {
+            //Man kan indsætte en ny employee i listen. Dette vises dog ikke i viewgrid i program da listen med ny
+            //employee overskrives med listen i constructoren når der sker et kald hen til denne metode.
             testEmployees.Add(employee);
+            return true;
         }
     }
 }

@@ -9,20 +9,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     <Grid>
+        <!-- opstiller rækker for det yderste overordnede grid-->
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+        <!-- placere et grid til form headeren på første række af det yderste grid-->
+        <Grid Grid.Row="0">
+            <!-- opstiller kolonner for det indre grid i headeren-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="610"/>
-                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
+            <!-- Placere tekstblok med form overskrift samt billede med logo i hver sin kolonne i headeren. Dette skal på et tidspunkt gøres mere dynamisk. Har endnu ikke fået det til at udvide sig med vinduet-->
             <TextBlock Grid.Column="0" Background="#CBD7C4" Text="Opgave GUI Afsluttende" Width="610" Foreground="#57102A" FontSize="30" FontWeight="bold" Height="50" VerticalAlignment="Center"/>
             <Image Grid.Column="1" x:Name="LogoPicture" Width="180" Height="50" Source="Pictures/Logo2.png" VerticalAlignment="Center" />
         </Grid>
+        <!-- Indsætter et frame som forskellige sider kan loades ind i på basis af clickevents -->
         <Frame NavigationUIVisibility="Hidden" x:Name="contentFrame" Content="Frame" Grid.Row="1" Width="800" Grid.ColumnSpan="2" Margin="0,0,-8,0"/>
+        <!-- Laver en menu som består af et stackpanel hvori der placeres knapper som modtager en menubutton style fra app resources -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="-4,0">
             <Button Style="{StaticResource menuButton}" x:Name="viewEmployees" Content="View employees" Width="200" Click="ViewEmployees_Click"  />
             <Button Style="{StaticResource menuButton}" x:Name="createEmployees" Content="Create employees" Width="200" Click="CreateEmployees_Click"/>

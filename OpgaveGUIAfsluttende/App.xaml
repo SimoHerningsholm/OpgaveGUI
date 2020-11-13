@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:OpgaveGUIAfsluttende"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!-- Der laves styles for de forskellige anvendte tools. Blandt andet med henblik på at overholde krav om
+        anvendelse arial skrifttype-->
         <Style x:Key="textBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="25"></Setter>
             <Setter Property="FontFamily" Value="Arial" />
@@ -25,6 +27,11 @@
             <Setter Property="FontFamily" Value="Arial" />
             <Setter Property="Background" Value="#9CB290" />
         </Style>
+        <Style x:Key="datepickerStyles" TargetType="DatePicker">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="FontFamily" Value="arial" />
+        </Style>
+        <!-- Laver style for menubutton-->
         <Style x:Key="menuButton" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="FontFamily" Value="Arial" />
@@ -32,12 +39,16 @@
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="200"/>
+            <!--For at faa knappen til at overskrive mouseovereffekt paa almindelig button skal der rettes paa selve button templaten-->
             <Setter Property="Template">
                 <Setter.Value>
+                    <!-- Saetter control template til at vaere standard button (den der skal overskrives) -->
                     <ControlTemplate TargetType="{x:Type Button}">
+                        <!-- Laver ramme omkring knappen hvori knappens indhol ligger (goere saa tekst vises)-->
                         <Border Name="Border" Background="#9CB290">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
                         </Border>
+                        <!-- Laver mouseover event der saetter en ny baggrundsfarve ved mouseover-->
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter TargetName="Border" Property="Background" Value="#CBD7C4" />

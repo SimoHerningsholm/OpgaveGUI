@@ -23,18 +23,21 @@ namespace OpgaveGUIAfsluttende
         public MainWindow()
         {
             InitializeComponent();
+            //Når programmet begynder initieres mainwindow framet med en forside
             FrontPage frontpg = new FrontPage();
             contentFrame.Navigate(frontpg);
         }
 
         private void CreateEmployees_Click(object sender, RoutedEventArgs e)
         {
+            //Ved klik på createemployee navigeres der til createsiden
             CreateEmployeePage createPage = new CreateEmployeePage();
             contentFrame.Navigate(createPage);
         }
 
         private void ViewEmployees_Click(object sender, RoutedEventArgs e)
         {
+            //ved klik på viewemployee navigeres der til viewsiden
             ViewEmployeePage viewPage = new ViewEmployeePage();
             contentFrame.Navigate(viewPage);
         }

@@ -6,5 +6,6 @@ namespace CLBL
 {
     class DetpartmentRepository
     {
+        //Jerry indtil videre
     }
 }

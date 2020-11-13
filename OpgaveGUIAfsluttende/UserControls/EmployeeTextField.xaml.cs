@@ -27,11 +27,13 @@ namespace OpgaveGUIAfsluttende.UserControls
 
         private void employeeTextField_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Modtager tekstboks fokus skal fontweight på label være bold
             employeeTextFieldLabel.FontWeight = FontWeights.Bold;
         }
 
         private void employeeTextField_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Mister comboboks fokus skal fontweight på label være bold
             employeeTextFieldLabel.FontWeight = FontWeights.Normal;
         }
     }

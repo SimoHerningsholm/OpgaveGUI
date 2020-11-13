@@ -33,13 +33,13 @@ namespace OpgaveGUIAfsluttende.UserControls
             empRep = new EmployeeRepository();
         }
 
-        private void CreateEmployee_Click(object sender, RoutedEventArgs e)
+        private async void CreateEmployee_Click(object sender, RoutedEventArgs e)
         {
             //Ved at klikke på createemployee kaldes createEmployee metoden fra employeerepository objektet, som modtager en ny employee der skal indsætets
             //Værdien der er valgt sættes i loadQueryOptionsResult som så lister id'er indenfor det valgte item
             try
             {
-                empRep.createEmployee(
+                await empRep.createEmployee(
                         new Employee
                         {
                             Name = EmployeeName.employeeTextField.Text,

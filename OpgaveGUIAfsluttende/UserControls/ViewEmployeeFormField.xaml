@@ -8,25 +8,35 @@
              xmlns:custom="clr-namespace:OpgaveGUIAfsluttende"
              d:DesignHeight="350" d:DesignWidth="650">
     <Grid>
+        <!-- Opstiller rowdefinitions for det overlæggende grid-->
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
             <RowDefinition Height="315" />
         </Grid.RowDefinitions>
+        <!-- placere overskrift med en textblock på første række i det overordnede grid-->
         <TextBlock Style="{StaticResource textBlockStyle}" Grid.Row="0" Text="View employees"></TextBlock>
+        <!-- placere et grid på anden række i det overordnede grid der skal indeholde controls-->
         <Grid Grid.Row="1">
+            <!-- opstiller kolonner for det indre grid-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="480" />
                 <ColumnDefinition Width="170" />
             </Grid.ColumnDefinitions>
+            <!-- lægger datagrid i kolonne 0-->
             <DataGrid Grid.Column="0" x:Name="EmployeeViewerGrid" Width="480" />
+            <!-- Laver et stackpanel som indeholder de resterende værktøjer i anden kolonne-->
             <StackPanel Grid.Column="1">
+                <!-- laver comboboks med queryoptions som modtager styles fra combostyles i app resources.-->
                 <ComboBox Style="{StaticResource comboStyles}" x:Name="QueryOptionsCombo"  Width="130" SelectionChanged="QueryOptionsCombo_SelectionChanged">
+                    <!-- Som en midlertidig løsning hardcodes comboboks valg, men hvis tiden tillader det skal det laves dynamisk på sigt-->
                     <ComboBoxItem Content="Employee Id"></ComboBoxItem>
                     <ComboBoxItem Content="Company Id"></ComboBoxItem>
                     <ComboBoxItem Content="Department Id"></ComboBoxItem>
                     <ComboBoxItem Content="Boss Id"></ComboBoxItem>
                 </ComboBox>
+                <!-- Laver en liste der kan indeholde de identificers der skal laves queries ud fra-->
                 <ListBox x:Name="QueryOptionResultList" Height="255" Width="130"/>
+                <!-- laver en queryemployee knap som eksekvere query og loader queried data ind i datagrid-->
                 <custom:QueryEmployee Content="Query employee"  Width="130" Click="QueryEmployee_Click"/>
             </StackPanel>
         </Grid>

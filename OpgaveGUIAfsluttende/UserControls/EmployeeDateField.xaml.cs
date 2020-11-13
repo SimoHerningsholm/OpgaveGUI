@@ -27,11 +27,13 @@ namespace OpgaveGUIAfsluttende.UserControls
 
         private void employeeDateField_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Modtager datepicker fokus skal fontweight på label være bold
             employeeDateFieldLabel.FontWeight = FontWeights.Bold;
         }
 
         private void employeeDateField_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Mister datepicker fokus skal fontweight på label være normal
             employeeDateFieldLabel.FontWeight = FontWeights.Normal;
         }
     }

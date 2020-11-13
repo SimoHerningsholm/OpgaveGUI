@@ -7,8 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
+        <!-- Opsætter label og textbox med dockpanel da stackpanel med horizontal orientation ikke opfangede alignment properties-->
         <DockPanel>
+            <!-- Laver en label der stiles af labelstyle fra app resources-->
             <Label Style="{StaticResource labelStyle}" x:Name="employeeTextFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <!-- Laver en textbox som stiles af textboxstyle fra app resources. Derudover har den focus events associeret med henblik på at fremhæve label ved focus-->
             <TextBox Style="{StaticResource textBoxStyle}" x:Name="employeeTextField" Width="200" Height="30" GotFocus="employeeTextField_GotFocus" LostFocus="employeeTextField_LostFocus" HorizontalAlignment="Right" />
         </DockPanel>
     </Grid>

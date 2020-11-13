@@ -9,6 +9,7 @@
       d:DesignHeight="400" d:DesignWidth="800"
       Title="ViewEmployeePage">
     <Grid>
+        <!-- indtil videre er det bare en side med en viewform. På sigt kan det eventuelt blive en side hvor man kan loade forskellige viewforms ind i.-->
         <Grid.RowDefinitions>
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>

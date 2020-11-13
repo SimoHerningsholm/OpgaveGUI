@@ -6,5 +6,6 @@ namespace CLDB
 {
     class DepartmentDataHandler
     {
+        //tom indtil videre
     }
 }

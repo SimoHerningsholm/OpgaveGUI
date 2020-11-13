@@ -7,9 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
     <Grid>
+        <!-- Opsætter label og datepicker med dockpanel da stackpanel med horizontal orientation ikke opfangede alignment properties-->
         <DockPanel>
-            <Label x:Name="employeeDateFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
-            <DatePicker x:Name="employeeDateField" Width="200" Height="30" GotFocus="employeeDateField_GotFocus" LostFocus="employeeDateField_LostFocus" HorizontalAlignment="Right"/>
+            <!-- Laver en label der stiles af labelstyle fra app resources-->
+            <Label Style="{StaticResource labelStyle}" x:Name="employeeDateFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <!-- Laver en datepicker som stiles af datepickerStyles fra app resources. Derudover har den focus events associeret med henblik på at fremhæve label ved focus. Denne tool gør det nemt at få brugeren til at inputte et rigtigt datetime format-->
+            <DatePicker Style="{StaticResource datepickerStyles}" x:Name="employeeDateField" Width="200" Height="30" GotFocus="employeeDateField_GotFocus" LostFocus="employeeDateField_LostFocus" HorizontalAlignment="Right"/>
         </DockPanel>
     </Grid>
 </UserControl>

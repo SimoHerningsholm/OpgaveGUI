@@ -35,6 +35,7 @@ namespace OpgaveGUIAfsluttende.UserControls
 
         private void QueryEmployee_Click(object sender, RoutedEventArgs e)
         {
+            //Klikkes der på queryemployee kaldes queryemployee metoden
             queryEmployee();
         }
         public async void loadEmployees()
@@ -67,7 +68,7 @@ namespace OpgaveGUIAfsluttende.UserControls
                 QueryOptionResultList.Items.Add(employees[i].Id);
             }
         }
-        private void queryEmployee()
+        private async void queryEmployee()
         {
             //Laver en liste af employees som opfylder kriterie (som har specifikt id)
             List<Employee> queriedEmployee = new List<Employee>();

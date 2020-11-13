@@ -6,6 +6,6 @@ namespace CLDB
 {
     class CompanyDataHandler
     {
-
+        //Tom indtil videre
     }
 }
