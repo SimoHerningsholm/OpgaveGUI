@@ -23,7 +23,7 @@
             <UserControls:EmployeeComboField x:Name="EmployeeCompany"  Height="35" Width="300" EmployeeComboFieldChanged="EmployeeCompany_EmployeeComboFieldChanged"/>
             <UserControls:EmployeeComboField x:Name="EmployeeDepartment" Height="35" Width="300" Visibility="Hidden"/>
             <!-- Der laves en knap af typen createemployee som er en custom control.-->
-            <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click"/>
+            <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click" />
             <!-- En label udskriver om der har været success med oprettelse eller ej--> 
             <Label x:Name="statusLabel"></Label>
         </StackPanel>

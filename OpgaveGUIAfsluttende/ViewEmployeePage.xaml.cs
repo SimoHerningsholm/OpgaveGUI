@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpgaveGUIAfsluttende.UserControls;
+using CLBL;
 
 namespace OpgaveGUIAfsluttende
 {
@@ -20,9 +22,17 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class ViewEmployeePage : Page
     {
-        public ViewEmployeePage()
+        public ViewEmployeePage(EmployeeRepository inRep)
         {
             InitializeComponent();
+            ViewEmployeeFormField viewfield = new ViewEmployeeFormField(inRep);
+            viewfield.HorizontalAlignment = HorizontalAlignment.Center;
+            viewfield.VerticalAlignment = VerticalAlignment.Center;
+            viewfield.Height = 400;
+            viewfield.Width = 650;
+            viewgrid.Children.Add(viewfield);
+
         }
+        /*ViewEmployeeFormField x:Name="EmployeekageCode" Grid.Row="0" Height="400" Width="650" HorizontalAlignment="Center" VerticalAlignment="Center" Loaded="EmployeekageCode_Loaded*/
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CLBL;
 
 namespace OpgaveGUIAfsluttende
 {
@@ -20,25 +21,27 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class MainWindow : Window
     {
+        private EmployeeRepository empRep;
         public MainWindow()
         {
             InitializeComponent();
             //Når programmet begynder initieres mainwindow framet med en forside
             FrontPage frontpg = new FrontPage();
+            empRep = new EmployeeRepository();
             contentFrame.Navigate(frontpg);
         }
 
         private void CreateEmployees_Click(object sender, RoutedEventArgs e)
         {
             //Ved klik på createemployees navigeres der til createsiden
-            CreateEmployeePage createPage = new CreateEmployeePage();
+            CreateEmployeePage createPage = new CreateEmployeePage(empRep);
             contentFrame.Navigate(createPage);
         }
 
         private void ViewEmployees_Click(object sender, RoutedEventArgs e)
         {
             //ved klik på viewemployees navigeres der til viewsiden
-            ViewEmployeePage viewPage = new ViewEmployeePage();
+            ViewEmployeePage viewPage = new ViewEmployeePage(empRep);
             contentFrame.Navigate(viewPage);
         }
 

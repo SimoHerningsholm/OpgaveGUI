@@ -8,11 +8,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="800"
       Title="ViewEmployeePage">
-    <Grid>
-        <!-- indtil videre er det bare en side med en viewform. På sigt kan det eventuelt blive en side hvor man kan loade forskellige viewforms ind i.-->
+    <Grid x:Name="viewgrid">
+        <!-- indtil videre er det bare en side der loader usercontrol gennem koden. På sigt kan det eventuelt blive en side hvor man kan loade forskellige viewforms ind i.-->
         <Grid.RowDefinitions>
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
-        <UserControls:ViewEmployeeFormField x:Name="EmployeekageCode" Grid.Row="0" Height="400" Width="650" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Page>

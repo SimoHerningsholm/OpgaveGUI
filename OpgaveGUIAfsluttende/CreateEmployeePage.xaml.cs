@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using CLBL;
+using OpgaveGUIAfsluttende.UserControls;
 namespace OpgaveGUIAfsluttende
 {
     /// <summary>
@@ -20,9 +21,13 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class CreateEmployeePage : Page
     {
-        public CreateEmployeePage()
+        public CreateEmployeePage(EmployeeRepository inRep)
         {
             InitializeComponent();
+            CreateEmployeeFormField createForm = new CreateEmployeeFormField(inRep);
+            createForm.Height = 300;
+            createForm.Width = 300;
+            viewGrid.Children.Add(createForm);
         }
     }
 }

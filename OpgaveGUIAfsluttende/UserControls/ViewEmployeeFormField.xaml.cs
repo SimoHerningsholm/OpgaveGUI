@@ -23,11 +23,11 @@ namespace OpgaveGUIAfsluttende.UserControls
     {
         private EmployeeRepository empRep;
         private List<Employee> empList;
-        public ViewEmployeeFormField()
+        public ViewEmployeeFormField(EmployeeRepository empRep)
         {
             InitializeComponent();
             //Employee Repository instancieres og emloyees loades i grid og comboboks fyldes med gyldige værdier (når der kommer SQL på)
-            empRep = new EmployeeRepository();
+            this.empRep = empRep;
             empList = new List<Employee>();
             loadEmployees();
             loadComboOptions();
@@ -71,23 +71,15 @@ namespace OpgaveGUIAfsluttende.UserControls
         private async void queryEmployee()
         {
             //Laver en liste af employees som opfylder kriterie (som har specifikt id)
-            List<Employee> queriedEmployee = new List<Employee>();
+            List<Employee> queriedEmployees = new List<Employee>();
             //Hvis der ikke er valgt noget har den intet at iterere igennem
-            if(QueryOptionResultList.SelectedValue != null)
+            if (QueryOptionResultList.SelectedValue != null)
             {
-            //iterere igennem listen af employees
-               for (int i = 0; i < empList.Count; i++)
-                {
-                    //Hvis der er en employee med id der er lig den valgte id så sættes den employee i listen over employees der opfylder kriterier
-                    if(empList[i].Id == (int)QueryOptionResultList.SelectedValue)
-                    {
-                        queriedEmployee.Add(empList[i]);
-                    }
-                }
+                //Finder alle employees hvor der er et match på valgt id og laver det til en liste som queriedEmployees sættes til at være
+                queriedEmployees = empList.Where(employee => employee.Id == (int)QueryOptionResultList.SelectedValue).ToList();
             }
- 
             //Sætter itemsource på datagrid til at være listen over employees der opfylder kriterier
-            EmployeeViewerGrid.ItemsSource = queriedEmployee;
+            EmployeeViewerGrid.ItemsSource = queriedEmployees;
         }
     }
 }

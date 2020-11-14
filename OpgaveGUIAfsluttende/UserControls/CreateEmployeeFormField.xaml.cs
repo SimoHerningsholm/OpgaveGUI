@@ -24,13 +24,14 @@ namespace OpgaveGUIAfsluttende.UserControls
     {
         private EmployeeRepository empRep;
         
-        public CreateEmployeeFormField()
+        public CreateEmployeeFormField(EmployeeRepository empRep)
         {
             InitializeComponent();
             setEmployeeFieldLabels();
             setComboCompanyItems();
             setComboDepartmentItems();
-            empRep = new EmployeeRepository();
+            this.empRep = empRep;
+           // empRep = new EmployeeRepository();
         }
 
         private async void CreateEmployee_Click(object sender, RoutedEventArgs e)
@@ -39,7 +40,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             //Værdien der er valgt sættes i loadQueryOptionsResult som så lister id'er indenfor det valgte item
             try
             {
-                await empRep.createEmployee(
+               bool status = await empRep.createEmployee(
                         new Employee
                         {
                             Name = EmployeeName.employeeTextField.Text,

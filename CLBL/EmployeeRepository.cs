@@ -31,8 +31,7 @@ namespace CLBL
         public async Task<bool> createEmployee(Employee employee)
         {
             //Der sendes en ny employee ind i datalaget. Her skal der laves validering
-            employeeBinder.createEmployee(employee);
-            return true;
+            return await employeeBinder.createEmployee(employee);
         }
         public async Task<bool> updateEmployee()
         {
