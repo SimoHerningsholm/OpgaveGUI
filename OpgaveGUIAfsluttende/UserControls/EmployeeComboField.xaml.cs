@@ -32,10 +32,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         protected void employeeComboFieldSelectionChanged(object sender, EventArgs e)
         {
             //Eksekveres denne metode eksekveres eventet såfremt eventet er sat
-            if (EmployeeComboFieldChanged != null)
-            {
-                EmployeeComboFieldChanged(sender, e);
-            }
+            EmployeeComboFieldChanged?.Invoke(sender, e);
         }
         private void employeeComboField_GotFocus(object sender, RoutedEventArgs e)
         {

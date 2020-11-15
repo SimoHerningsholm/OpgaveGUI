@@ -33,6 +33,5 @@ namespace OpgaveGUIAfsluttende
             viewgrid.Children.Add(viewfield);
 
         }
-        /*ViewEmployeeFormField x:Name="EmployeekageCode" Grid.Row="0" Height="400" Width="650" HorizontalAlignment="Center" VerticalAlignment="Center" Loaded="EmployeekageCode_Loaded*/
     }
 }

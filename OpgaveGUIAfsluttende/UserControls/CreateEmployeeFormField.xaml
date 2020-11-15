@@ -7,7 +7,7 @@
              xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls" 
              xmlns:custom="clr-namespace:OpgaveGUIAfsluttende"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="340" d:DesignWidth="400">
     <Grid>
         <!-- Formens elementer lægges i et stackpanel-->
         <StackPanel>
@@ -26,6 +26,7 @@
             <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click" />
             <!-- En label udskriver om der har været success med oprettelse eller ej--> 
             <Label x:Name="statusLabel"></Label>
+            <UserControls:EmployeeComboField x:Name="EmployeeErrors" Height="35" Width="300" Visibility="Hidden" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -5,6 +5,7 @@ using CLDB;
 using System.Threading;
 using System.Threading.Tasks;
 using CLModels;
+using CLValidator;
 
 namespace CLBL
 {
@@ -13,10 +14,14 @@ namespace CLBL
         //Denne her klasse er overordnet set bare en unødvendig mellemvej indtil der bliver implimenteret validering
         //eller anden funktionalitet data skal køres igennem før det lander i sine respektive endestationer.
         EmployeeDataHandler employeeBinder;
+        EmployeeFieldChecker employeeChecker;
+        List<string> employeeCheckerErrors;
         public EmployeeRepository()
         {
             //Instanciere datahandler
             employeeBinder = new EmployeeDataHandler();
+            employeeChecker = new EmployeeFieldChecker();
+            employeeCheckerErrors = new List<string>();
         }
         public async Task<List<Employee>> getEmployees()
         {
@@ -31,7 +36,15 @@ namespace CLBL
         public async Task<bool> createEmployee(Employee employee)
         {
             //Der sendes en ny employee ind i datalaget. Her skal der laves validering
-            return await employeeBinder.createEmployee(employee);
+            if(await employeeChecker.Check(employee))
+            {
+                return await employeeBinder.createEmployee(employee);
+            }
+            else
+            {
+                employeeCheckerErrors = await employeeChecker.getErrorMessages();
+                return false;
+            }
         }
         public async Task<bool> updateEmployee()
         {
@@ -42,6 +55,10 @@ namespace CLBL
         {
             //bliver først implementeret når der kommer SQL på.
             return true;
+        }
+        public List<string> getErrors()
+        {
+            return employeeCheckerErrors;
         }
     }
 }

@@ -195,6 +195,10 @@
       <Project>{439d6303-a2e8-435f-9a01-0ee492c47f88}</Project>
       <Name>CLModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CLValidator\CLValidator.csproj">
+      <Project>{fa38a375-eacf-4f03-9a5c-4fe66438022e}</Project>
+      <Name>CLValidator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pictures\Logo.png" />

@@ -25,7 +25,7 @@ namespace OpgaveGUIAfsluttende
         {
             InitializeComponent();
             CreateEmployeeFormField createForm = new CreateEmployeeFormField(inRep);
-            createForm.Height = 300;
+            createForm.Height = 340;
             createForm.Width = 300;
             viewGrid.Children.Add(createForm);
         }

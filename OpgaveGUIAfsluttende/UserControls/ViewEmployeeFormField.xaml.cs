@@ -33,7 +33,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             loadComboOptions();
         }
 
-        private void QueryEmployee_Click(object sender, RoutedEventArgs e)
+        private async void QueryEmployee_Click(object sender, RoutedEventArgs e)
         {
             //Klikkes der på queryemployee kaldes queryemployee metoden
             queryEmployee();
