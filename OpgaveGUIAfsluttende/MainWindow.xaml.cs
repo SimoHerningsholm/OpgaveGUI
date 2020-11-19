@@ -30,32 +30,28 @@ namespace OpgaveGUIAfsluttende
             empRep = new EmployeeRepository();
             contentFrame.Navigate(frontpg);
         }
-
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             //Ved klik på createemployees navigeres der til createsiden
             CreatePage createPage = new CreatePage(empRep);
             contentFrame.Navigate(createPage);
         }
-
         private void View_Click(object sender, RoutedEventArgs e)
         {
             //ved klik på viewemployees navigeres der til viewsiden
             ViewPage viewPage = new ViewPage(empRep);
             contentFrame.Navigate(viewPage);
         }
-
         private void update_Click(object sender, RoutedEventArgs e)
         {
             //ved klik på updateemployees navigeres der til updatesiden
-            UpdatePage updatePage = new UpdatePage();
+            UpdatePage updatePage = new UpdatePage(empRep);
             contentFrame.Navigate(updatePage);
         }
-
         private void delete_Click(object sender, RoutedEventArgs e)
         {
             //ved klik på deleteemployees navigeres der til deletesiden
-            DeletePage deletePage = new DeletePage();
+            DeletePage deletePage = new DeletePage(empRep);
             contentFrame.Navigate(deletePage);
         }
     }

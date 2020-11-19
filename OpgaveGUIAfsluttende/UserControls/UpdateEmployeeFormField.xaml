@@ -4,9 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpgaveGUIAfsluttende.UserControls"
+             xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls"
+             xmlns:custom="clr-namespace:OpgaveGUIAfsluttende"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800">
+
     <Grid>
-        <TextBlock HorizontalAlignment="Left" FontSize="35" Margin="312,184,0,0" TextWrapping="Wrap" Text="To be built" VerticalAlignment="Top" RenderTransformOrigin="-1.737,-1.246"/>
+        <!-- Opstiller rowdefinitions for det overlæggende grid-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="500" />
+        </Grid.RowDefinitions>
+        <!-- placere overskrift med en textblock på første række i det overordnede grid-->
+        <TextBlock Style="{StaticResource textBlockStyle}" Grid.Row="0" Text="Update employees"></TextBlock>
+        <!-- placere et grid på anden række i det overordnede grid der skal indeholde controls-->
+        <Grid Grid.Row="1">
+            <!-- opstiller kolonner for det indre grid-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="275" />
+                <ColumnDefinition Width="525" />
+            </Grid.ColumnDefinitions>
+            <!-- lægger datagrid i kolonne 0-->
+            <DataGrid Grid.Column="1" x:Name="EmployeeViewerGrid" Width="500" />
+            <!-- Laver et stackpanel som indeholder de resterende værktøjer i anden kolonne-->
+            <!-- Formens elementer lægges i et stackpanel-->
+            <StackPanel Margin="0 20 0 0">
+                <!-- Laver overskrift som stiles af textblockstyle fra app resources-->
+                <!-- Anvender en usercontrol til hvert form felt. Der er usercontrol til textbox, til datetimepicker og til comboboks-->
+                <UserControls:TextField x:Name="EmployeeFirstName" Height="35" Width="275"/>
+                <UserControls:TextField x:Name="EmployeeLastName" Height="35" Width="275"/>
+                <UserControls:TextField x:Name="EmployeeStreet" Height="35" Width="275"/>
+                <UserControls:ComboField x:Name="EmployeeZipCode" Height="35" Width="275" comboFieldChanged="EmployeeZipCode_comboFieldChanged"/>
+                <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="275"/>
+                <UserControls:TextField x:Name="EmployeeEmail" Height="35" Width="275"/>
+                <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="275"/>
+                <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="275"/>
+                <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="275" comboFieldChanged="EmployeeCompany_comboFieldChanged"/>
+                <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="275" comboFieldChanged="EmployeeDepartment_comboFieldChanged" Visibility="Hidden"/>
+                <!-- Der laves en knap af typen createemployee som er en custom control.-->
+                <Button Style="{StaticResource buttonStyles}" x:Name="UpdateEmployeeBtn" Content="Update Employee" Width="160" Height="30"></Button>
+                <!-- En label udskriver om der har været success med oprettelse eller ej-->
+                <Label x:Name="statusLabel"></Label>
+                <UserControls:ComboField x:Name="EmployeeErrors" Height="35" Width="275" Visibility="Hidden" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

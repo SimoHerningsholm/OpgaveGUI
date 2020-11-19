@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CLBL;
 
 namespace OpgaveGUIAfsluttende.UserControls
 {
@@ -20,9 +21,14 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class DeleteEmployeeFormField : UserControl
     {
-        public DeleteEmployeeFormField()
+        public DeleteEmployeeFormField(EmployeeRepository rep)
         {
             InitializeComponent();
+        }
+
+        private void DeleteEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

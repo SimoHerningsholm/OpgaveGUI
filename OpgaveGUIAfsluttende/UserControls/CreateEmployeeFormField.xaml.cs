@@ -68,10 +68,14 @@ namespace OpgaveGUIAfsluttende.UserControls
         private async void setEmployeeFieldLabels()
         {
             //Content på labels i de forskellige usercontrols sættes med de værdier der gør sig gældende for en createemployee form
-            EmployeeName.TextFieldLabel.Content = "Name:";
-            EmployeeAddress.TextFieldLabel.Content = "Address:";
-            EmployeeZipCode.TextFieldLabel.Content = "Zipcode:";
+            EmployeeFirstName.TextFieldLabel.Content = "Firstname:";
+            EmployeeLastName.TextFieldLabel.Content = "Lastname:";
+            EmployeeStreet.TextFieldLabel.Content = "Street:";
+            EmployeeZipCode.ComboFieldLabel.Content = "Zipcode";
             EmployeeBirthDay.DateFieldLabel.Content = "Birthday:";
+            EmployeeEmail.TextFieldLabel.Content = "Email";
+            EmployeePhone.TextFieldLabel.Content = "Phone";
+            EmployeeDepartment.ComboFieldLabel.Content = "Jobtitle";
             EmployeeCompany.ComboFieldLabel.Content = "Company:";
             EmployeeDepartment.ComboFieldLabel.Content = "Department:";
         }
@@ -98,12 +102,12 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void setEmployeeTxtFields()
         {
-            nameField = EmployeeName.TextBoxField.Text;
+        /*    nameField = EmployeeName.TextBoxField.Text;
             addressField = EmployeeAddress.TextBoxField.Text;
             zipCodeField = EmployeeZipCode.TextBoxField.Text;
             birthDayField = EmployeeBirthDay.DatePickField.Text;
             companyField = EmployeeCompany.ComboBoxField.SelectedItem;
-            departmentField = EmployeeDepartment.ComboBoxField.SelectedItem;
+            departmentField = EmployeeDepartment.ComboBoxField.SelectedItem;*/
         }
         private async Task<List<object>> getEmployeeFieldArray()
         {

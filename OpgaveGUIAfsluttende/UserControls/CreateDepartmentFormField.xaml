@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:OpgaveGUIAfsluttende.UserControls"
              xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="400">
+             d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
-        <StackPanel>
+        <StackPanel Margin="0 20 0 0">
             <!-- Laver overskrift som stiles af textblockstyle fra app resources-->
             <TextBlock Style="{StaticResource textBlockStyle}" Text="Create Department form"  Width="300" Height="30"></TextBlock>
             <!-- Anvender en usercontrol til hvert form felt. Der er usercontrol til textbox og til comboboks-->

@@ -26,32 +26,27 @@ namespace OpgaveGUIAfsluttende
         {
             InitializeComponent();
             rep = inRep;
-
         }
-
         private void CreateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
             CreateEmployeeFormField createForm = new CreateEmployeeFormField(rep);
-            createForm.Height = 340;
+            createForm.Height = 480;
             createForm.Width = 300;
             viewGrid.Children.Add(createForm);
             hideBtns();
-            
         }
-
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
             CreateDepartmentFormField createForm = new CreateDepartmentFormField(rep);
-            createForm.Height = 340;
+            createForm.Height = 480;
             createForm.Width = 300;
             viewGrid.Children.Add(createForm);
             hideBtns();
-
         }
-        public void hideBtns()
+        private void hideBtns()
         {
-            CreateEmployeeBtn.Visibility = Visibility.Hidden;
             CreateDepartmentBtn.Visibility = Visibility.Hidden;
+            CreateEmployeeBtn.Visibility = Visibility.Hidden;
         }
     }
 }

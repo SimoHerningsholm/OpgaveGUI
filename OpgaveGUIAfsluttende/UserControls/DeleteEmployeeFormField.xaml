@@ -5,8 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpgaveGUIAfsluttende.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="650">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" FontSize="35" Margin="312,184,0,0" TextWrapping="Wrap" Text="To be built" VerticalAlignment="Top" RenderTransformOrigin="-1.737,-1.246"/>
+        <!-- Opstiller rowdefinitions for det overlæggende grid-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="415" />
+        </Grid.RowDefinitions>
+        <!-- placere overskrift med en textblock på første række i det overordnede grid-->
+        <TextBlock Style="{StaticResource textBlockStyle}" Grid.Row="0" Text="Delete employees"></TextBlock>
+        <!-- placere et grid på anden række i det overordnede grid der skal indeholde controls-->
+        <Grid Grid.Row="1">
+            <!-- opstiller kolonner for det indre grid-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170" />
+                <ColumnDefinition Width="480" />
+            </Grid.ColumnDefinitions>
+            <!-- lægger datagrid i kolonne 0-->
+            <DataGrid Grid.Column="1" x:Name="EmployeeViewerGrid" Width="480" />
+            <!-- Laver et stackpanel som indeholder de resterende værktøjer i anden kolonne-->
+            <StackPanel Grid.Column="0" >
+                <Label Style="{StaticResource labelStyle}" Background="#9CB290" FontWeight="Bold" Content="Chosen Employee" Width="160"></Label>
+                <StackPanel Orientation="Horizontal" Background="White" Width="160">
+                    <Label Style="{StaticResource labelStyle}" Content="Id:" Width="60"></Label>
+                    <Label x:Name="chosenEmployeeId" Width="100"></Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Background="White" Width="160">
+                    <Label Style="{StaticResource labelStyle}" Content="Name:" Width="60"></Label>
+                    <Label x:Name="chosenEmployeeName" Width="100"></Label>
+                </StackPanel>
+                <Button Style="{StaticResource buttonStyles}" x:Name="DeleteEmployeeBtn" Content="Delete Employee" Width="160" Height="30" Click="DeleteEmployeeBtn_Click"></Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

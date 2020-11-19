@@ -7,19 +7,21 @@
              xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls" 
              xmlns:custom="clr-namespace:OpgaveGUIAfsluttende"
              mc:Ignorable="d" 
-             d:DesignHeight="340" d:DesignWidth="400">
+             d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <!-- Formens elementer lægges i et stackpanel-->
-        <StackPanel>
+        <StackPanel Margin="0 20 0 0">
             <!-- Laver overskrift som stiles af textblockstyle fra app resources-->
-            <TextBlock Style="{StaticResource textBlockStyle}" Text="Create employee form"  Width="300" Height="30"></TextBlock>
+            <TextBlock Style="{StaticResource textBlockStyle}" Text="Create employee form"  Width="400" Height="30"></TextBlock>
             <!-- Anvender en usercontrol til hvert form felt. Der er usercontrol til textbox, til datetimepicker og til comboboks-->
-            <UserControls:TextField x:Name="EmployeeName" Height="35" Width="300"/>
-            <UserControls:TextField x:Name="EmployeeAddress" Height="35" Width="300"/>
-            <UserControls:TextField x:Name="EmployeeZipCode" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeeFirstName" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeeLastName" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeeStreet" Height="35" Width="300"/>
+            <UserControls:ComboField x:Name="EmployeeZipCode" Height="35" Width="300"/>
             <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
-            <!-- Den nederste comboboks er usynlig indtil der er sat en værdi med den første comboboks (man skal vælge firma før man får lov at vælge afdeling-->
-            <!-- Dette gøres ved at anvende en manuelt oprettet eventhandler der registrere selectionchanged event inde i comboboks usercontrol--> 
+            <UserControls:TextField x:Name="EmployeeEmail" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="300"/>
+            <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="300"/>
             <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="300" comboFieldChanged="Company_ComboFieldChanged"/>
             <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="300" Visibility="Hidden"/>
             <!-- Der laves en knap af typen createemployee som er en custom control.-->

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpgaveGUIAfsluttende.UserControls;
+using CLBL;
 
 namespace OpgaveGUIAfsluttende
 {
@@ -20,9 +22,23 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class UpdatePage : Page
     {
-        public UpdatePage()
+        private EmployeeRepository rep;
+        public UpdatePage(EmployeeRepository inRep)
         {
             InitializeComponent();
+            rep = inRep;
+        }
+        private void UpdateEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateEmployeeFormField updateForm = new UpdateEmployeeFormField(rep);
+            updateForm.Height = 530;
+            updateForm.Width = 800;
+            viewGrid.Children.Add(updateForm);
+            hideBtns();
+        }
+        private void hideBtns()
+        {
+            UpdateEmployeeBtn.Visibility = Visibility.Hidden;
         }
     }
 }
