@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <!-- Placere tekstblok med form overskrift samt billede med logo i hver sin kolonne i headeren. Dette skal på et tidspunkt gøres mere dynamisk. Har endnu ikke fået det til at udvide sig med vinduet-->
-            <TextBlock Grid.Column="0" Background="#CBD7C4" Text="Opgave GUI Afsluttende" Width="610" Foreground="#57102A" FontSize="30" FontWeight="bold" Height="50" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Background="#CBD7C4" Text="Opgave DB Afsluttende" Width="610" Foreground="#57102A" FontSize="30" FontWeight="bold" Height="50" VerticalAlignment="Center"/>
             <Image Grid.Column="1" x:Name="LogoPicture" Width="180" Height="50" Source="Pictures/Logo2.png" VerticalAlignment="Center" />
         </Grid>
         <!-- Indsætter et frame som forskellige sider kan loades ind i på basis af clickevents -->

@@ -5,11 +5,13 @@ namespace CLModels
     public class Employee
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address{ get; set; }
-        public int ZipCode { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Address { get; set; }
         public DateTime BirthDay { get; set; }
-        public string Company { get; set; }
-        public string Department { get; set; }
+        public string Email { get; set; }
+        public int Phone { get; set; }
+        public int Department { get; set; }
+        public int JobTitle { get; set; }
     }
 }

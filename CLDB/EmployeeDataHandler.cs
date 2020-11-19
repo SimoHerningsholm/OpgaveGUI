@@ -3,46 +3,193 @@ using CLModels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace CLDB
 {
     public class EmployeeDataHandler
     {
         //Deklerere liste af testemployees
-        List<Employee> testEmployees;
+        private string connectionString;
+        private SqlConnection conn;
+        private List<Employee> employeeList;
         public EmployeeDataHandler()
         {
             //Generere en liste af employee objekter der kan simulere database data i frontend
-            testEmployees = new List<Employee>()
+            connectionString = "Data Source=localhost;Initial Catalog=AdventureWorks2016CTP3;User ID=SA;Password=Test142536";
+            conn = new SqlConnection(connectionString);
+            employeeList = new List<Employee>();
+        }
+        public async Task<List<Employee>> GetEmployees()
+        {
+            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            SqlCommand cmd = new SqlCommand("AllEmployeesView", conn);
+            try
             {
-                new Employee() {Id=1, Name = "Kurt", Address = "Kurtstreet 3", BirthDay = new DateTime(1980, 12, 24), Company = "FunnyINC", Department = "Comedy", ZipCode = 8000 },
-                new Employee() {Id=2, Name = "Benny", Address = "Bennystreet 3", BirthDay = new DateTime(1980, 11, 24), Company = "CircusArena", Department = "Acrobatics", ZipCode = 8700 },
-                new Employee() {Id=3, Name = "Sigurd", Address = "Sigurdstreet 3", BirthDay = new DateTime(1985, 10, 24), Company = "ToysRUs", Department = "ToyProduction", ZipCode = 7400 },
-                new Employee() {Id=4, Name = "Lene", Address = "Lenestreet 3", BirthDay = new DateTime(1991, 9, 24), Company = "FunnyINC", Department = "Management", ZipCode = 7100 },
-                new Employee() {Id=5, Name = "Claudia", Address = "Claudiatreet 3", BirthDay = new DateTime(1980, 12, 24), Company = "CircusArena", Department = "Acrobatics", ZipCode = 8000 },
-                new Employee() {Id=6, Name = "Peter", Address = "Peterstreet 3", BirthDay = new DateTime(1972, 12, 24), Company = "SantaInc", Department = "ToyProduction", ZipCode = 7210 },
-                new Employee() {Id=7, Name = "Anders", Address = "Andersstreet 3", BirthDay = new DateTime(1980, 12, 24), Company = "FunnyINC", Department = "Comedy", ZipCode = 1500 },
-                new Employee() {Id=8, Name = "Line", Address = "Linestreet 3", BirthDay = new DateTime(1993, 12, 24), Company = "CircusArena", Department = "Linedancers", ZipCode = 8400 },
-                new Employee() {Id=9, Name = "Lone", Address = "Lonesstreet 3", BirthDay = new DateTime(1977, 12, 24), Company = "ToysRUs", Department = "Management", ZipCode = 1500 },
-                new Employee() {Id=10, Name = "Magnus", Address = "Magnusstreet 3", BirthDay = new DateTime(1988, 12, 24), Company = "FunnyINC", Department = "Management", ZipCode = 8400 }
-            };
+                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                await conn.OpenAsync();
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    Employee tempEmp= new Employee();
+                    tempEmp.Id = (int)reader["Id"];
+                    tempEmp.FirstName = (string)reader["FirstName"];
+                    tempEmp.LastName = (string)reader["LastName"];
+                    tempEmp.Address = (int)reader["Address"];
+                    tempEmp.BirthDay = (DateTime)reader["BirthDay"];
+                    tempEmp.Email = (string)reader["Email"];
+                    tempEmp.Phone = (int)reader["Phone"];
+                    tempEmp.Department = (int)reader["Department"];
+                    tempEmp.JobTitle = (int)reader["JobTitle"];
+                    employeeList.Add(tempEmp);
+                }
+                conn.Close();
+            }
+            catch (Exception e) //Er der gået noget galt laves en exception
+            {
+                employeeList = null;
+            }
+            //Returnere modellisten uanset hvordan læsning af data er gået
+            return employeeList;
         }
-        public async Task<List<Employee>> getEmployees()
+        public async Task<Employee> GetEmployee(int id)
         {
-            //Indtil der kommer databasefunktionalitet returneres listen bare til den der kalder metoden
-            return testEmployees;
+            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            SqlCommand cmd = new SqlCommand("AllEmployeesView", conn);
+            try
+            {
+                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                await conn.OpenAsync();
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                await reader.ReadAsync();
+                Employee tempEmp = new Employee();
+                tempEmp.Id = (int)reader["Id"];
+                tempEmp.FirstName = (string)reader["FirstName"];
+                tempEmp.LastName = (string)reader["LastName"];
+                tempEmp.Address = (int)reader["Address"];
+                tempEmp.BirthDay = (DateTime)reader["BirthDay"];
+                tempEmp.Email = (string)reader["Email"];
+                tempEmp.Phone = (int)reader["Phone"];
+                tempEmp.Department = (int)reader["Department"];
+                tempEmp.JobTitle = (int)reader["JobTitle"];
+                employeeList.Add(tempEmp);
+                conn.Close();
+                return tempEmp;
+            }
+            catch (Exception e) //Er der gået noget galt laves en exception
+            {
+                return null;
+            }
         }
-        public async Task<Employee> getEmployee()
+        public async Task<bool> CreateEmployee(Employee inEmp)
         {
-            //Indtil der kommer databasefunktionalitet returneres den første employee fra listen
-            return testEmployees[0];
+            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            SqlCommand cmd = new SqlCommand("CreateEmployee", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //værdier associeres med parametre for den ovenstående query  
+            cmd.Parameters.AddWithValue("@FirstName", inEmp.FirstName);
+            cmd.Parameters.AddWithValue("@LastName", inEmp.LastName);
+            cmd.Parameters.AddWithValue("@Address", inEmp.Address);
+            cmd.Parameters.AddWithValue("@Birthday", inEmp.BirthDay);
+            cmd.Parameters.AddWithValue("@Email", inEmp.Email);
+            cmd.Parameters.AddWithValue("@Phone", inEmp.Phone);
+            cmd.Parameters.AddWithValue("@Department", inEmp.Department);
+            cmd.Parameters.AddWithValue("@JobTitle", inEmp.JobTitle);
+            try
+            {
+                //åbner forbindelse til databasen
+                await conn.OpenAsync();
+                //Eksekvere SQL op imod databasen
+                if (await cmd.ExecuteNonQueryAsync() == 1)
+                {
+                    //Lukker forbindelsen og returner at sql er eksekveret successfuldt
+                    conn.Close();
+                    return true;
+                }
+                else
+                {
+                    //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                    conn.Close();
+                    return false;
+                }
+            }
+            catch
+            {
+                //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                return false;
+            }
         }
-        public async Task<bool> createEmployee(Employee employee)
+        public async Task<bool> UpdateEmployee(Employee inEmp)
         {
-            //Man kan indsætte en ny employee i listen. Dette vises dog ikke i viewgrid i program da listen med ny
-            //employee overskrives med listen i constructoren når der sker et kald hen til denne metode.
-            testEmployees.Add(employee);
-            return true;
+            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            SqlCommand cmd = new SqlCommand("UpdateEmployee", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //værdier associeres med parametre for den ovenstående query  
+            cmd.Parameters.AddWithValue("@Id", inEmp.Id);
+            cmd.Parameters.AddWithValue("@FirstName", inEmp.FirstName);
+            cmd.Parameters.AddWithValue("@LastName", inEmp.LastName);
+            cmd.Parameters.AddWithValue("@Address", inEmp.Address);
+            cmd.Parameters.AddWithValue("@Birthday", inEmp.BirthDay);
+            cmd.Parameters.AddWithValue("@Email", inEmp.Email);
+            cmd.Parameters.AddWithValue("@Phone", inEmp.Phone);
+            cmd.Parameters.AddWithValue("@Department", inEmp.Department);
+            cmd.Parameters.AddWithValue("@JobTitle", inEmp.JobTitle);
+            try
+            {
+                //åbner forbindelse til databasen
+                await conn.OpenAsync();
+                //Eksekvere SQL op imod databasen
+                if (await cmd.ExecuteNonQueryAsync() == 1)
+                {
+                    //Lukker forbindelsen og returner at sql er eksekveret successfuldt
+                    conn.Close();
+                    return true;
+                }
+                else
+                {
+                    //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                    conn.Close();
+                    return false;
+                }
+            }
+            catch
+            {
+                //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                return false;
+            }
+        }
+        public async Task<bool> DeleteEmployee(int empId)
+        {
+            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            SqlCommand cmd = new SqlCommand("DeleteEmployee", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //værdier associeres med parametre for den ovenstående query  
+            cmd.Parameters.AddWithValue("@Id", empId);
+            try
+            {
+                //åbner forbindelse til databasen
+                await conn.OpenAsync();
+                //Eksekvere SQL op imod databasen
+                if (await cmd.ExecuteNonQueryAsync() == 1)
+                {
+                    //Lukker forbindelsen og returner at sql er eksekveret successfuldt
+                    conn.Close();
+                    return true;
+                }
+                else
+                {
+                    //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                    conn.Close();
+                    return false;
+                }
+            }
+            catch
+            {
+                //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                return false;
+            }
         }
     }
 }
