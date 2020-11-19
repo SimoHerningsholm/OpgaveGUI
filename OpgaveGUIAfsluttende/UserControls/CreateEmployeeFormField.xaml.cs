@@ -26,12 +26,6 @@ namespace OpgaveGUIAfsluttende.UserControls
         private EmployeeDataTypeChecker employeeInputDataCheck;
         //Brugerinput sættes til at være objekter som skal valideres for om de opfylder datatype krav for employee properties. 
         //Efter valideringen castes de til korrekt datatype hvis de successfuldt er gået igennem
-        private object nameField;
-        private object addressField;
-        private object zipCodeField;
-        private object birthDayField;
-        private object companyField;
-        private object departmentField;
         public CreateEmployeeFormField(EmployeeRepository empRep)
         {
             InitializeComponent();
@@ -43,27 +37,34 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void CreateEmployee_Click(object sender, RoutedEventArgs e)
         {
-          /*  //Sætter properties med brugerinput
-            setEmployeeTxtFields();
-            //tjekker på alle brugerinput employeeDataChecker som tjekker at datatyper for felter er korrekt for et employee objekt
-            if(employeeInputDataCheck.employeeDataChecker(await getEmployeeFieldArray()))
+            try
             {
                 //Efter objektet er lavet valideres der på om employee er oprettet
-                if(await empRep.CreateEmployee(new Employee { FirstName = (string)nameField, Address = (string)addressField, ZipCode = int.Parse((string)zipCodeField), BirthDay = Convert.ToDateTime(birthDayField), Company = (string)companyField, Department = (string)departmentField }))
-                {
-                    EmployeeErrors.Visibility = Visibility.Hidden;
-                    statusLabel.Visibility = Visibility.Visible;
-                    statusLabel.Content = "Employee created successfully";
-                }
-                else
-                {
-                    genErrorMessages(empRep.getErrors());
-                }
+                Employee newEmp = new Employee();
+                newEmp.FirstName = EmployeeFirstName.TextBoxField.Text;
+                newEmp.LastName = EmployeeLastName.TextBoxField.Text;
+                newEmp.Address = 0;
+                newEmp.BirthDay = Convert.ToDateTime(EmployeeBirthDay.DatePickField.Text);
+                newEmp.Email = EmployeeEmail.TextBoxField.Text;
+                newEmp.Phone = int.Parse(EmployeePhone.TextBoxField.Text);
+                newEmp.Department = 0;
+                newEmp.JobTitle = setJobTitleFromName();
+                await empRep.CreateEmployee(newEmp);
             }
-            else
+            catch
             {
-                genErrorMessages(employeeInputDataCheck.getErrorMessages());
-            }*/
+                statusLabel.Content = "error";
+            }
+
+            
+        }
+        private int setDepartmentFromName()
+        {
+            return 0;
+        }
+        private int setJobTitleFromName()
+        {
+            return 0;
         }
         private async void setEmployeeFieldLabels()
         {
@@ -82,46 +83,25 @@ namespace OpgaveGUIAfsluttende.UserControls
         private async void setComboCompanyItems()
         {
             //Sætter company items. Indtil videre hardcodes der bare nogle værdier, men de skal hentes businesslag som henter fra datalag
-            EmployeeCompany.ComboBoxField.Items.Add("FunnyINC");
-            EmployeeCompany.ComboBoxField.Items.Add("CircusArena");
-            EmployeeCompany.ComboBoxField.Items.Add("ToysRUs");
-            EmployeeCompany.ComboBoxField.Items.Add("CircusArena");
         }
         private async void setComboDepartmentItems()
         {
             //Sætter department items. Indtil videre hardcodes der bare nogle værdier, men de skal hentes på basis af valgt company fra liste fra fået fra businesslag som henter fra datalag
-            EmployeeDepartment.ComboBoxField.Items.Add("Comedy");
-            EmployeeDepartment.ComboBoxField.Items.Add("Acrobatics");
-            EmployeeDepartment.ComboBoxField.Items.Add("ToyProduction");
-            EmployeeDepartment.ComboBoxField.Items.Add("Management");
         }
         private async void Company_ComboFieldChanged(object sender, EventArgs e)
         {
             //Er der valgt et firma sættes employeedepartment comboboks til at være synlig så man kan vælge afdeling
             EmployeeDepartment.Visibility = Visibility.Visible;
         }
-        private async void setEmployeeTxtFields()
+
+        private void EmployeeJobTitle_comboFieldChanged(object sender, EventArgs e)
         {
-        /*    nameField = EmployeeName.TextBoxField.Text;
-            addressField = EmployeeAddress.TextBoxField.Text;
-            zipCodeField = EmployeeZipCode.TextBoxField.Text;
-            birthDayField = EmployeeBirthDay.DatePickField.Text;
-            companyField = EmployeeCompany.ComboBoxField.SelectedItem;
-            departmentField = EmployeeDepartment.ComboBoxField.SelectedItem;*/
+
         }
-        private async Task<List<object>> getEmployeeFieldArray()
+
+        private void EmployeeDepartment_comboFieldChanged(object sender, EventArgs e)
         {
-            return new List<object>() { nameField, addressField, zipCodeField, birthDayField, companyField, departmentField };
-        }
-        private async void genErrorMessages(List<string> errors)
-        {
-            EmployeeErrors.ComboBoxField.Items.Clear();
-            EmployeeErrors.Visibility = Visibility.Visible;
-            EmployeeErrors.ComboFieldLabel.Content = "Error:";
-            for (int i = 0; i < errors.Count; i++)
-            {
-                EmployeeErrors.ComboBoxField.Items.Add(errors[i]);
-            }
+
         }
     }
 }

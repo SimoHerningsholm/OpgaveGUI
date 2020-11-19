@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="525" />
             </Grid.ColumnDefinitions>
             <!-- lægger datagrid i kolonne 0-->
-            <DataGrid Grid.Column="1" x:Name="EmployeeViewerGrid" Width="500" />
+            <DataGrid Grid.Column="1" x:Name="EmployeeViewerGrid" Width="500" SelectionChanged="EmployeeViewerGrid_SelectionChanged" />
             <!-- Laver et stackpanel som indeholder de resterende værktøjer i anden kolonne-->
             <!-- Formens elementer lægges i et stackpanel-->
             <StackPanel Margin="0 20 0 0">
@@ -42,7 +42,7 @@
                 <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="275" comboFieldChanged="EmployeeCompany_comboFieldChanged"/>
                 <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="275" comboFieldChanged="EmployeeDepartment_comboFieldChanged" Visibility="Hidden"/>
                 <!-- Der laves en knap af typen createemployee som er en custom control.-->
-                <Button Style="{StaticResource buttonStyles}" x:Name="UpdateEmployeeBtn" Content="Update Employee" Width="160" Height="30"></Button>
+                <Button Style="{StaticResource buttonStyles}" x:Name="UpdateEmployeeBtn" Content="Update Employee" Width="160" Height="30" Click="UpdateEmployeeBtn_Click"></Button>
                 <!-- En label udskriver om der har været success med oprettelse eller ej-->
                 <Label x:Name="statusLabel"></Label>
                 <UserControls:ComboField x:Name="EmployeeErrors" Height="35" Width="275" Visibility="Hidden" />

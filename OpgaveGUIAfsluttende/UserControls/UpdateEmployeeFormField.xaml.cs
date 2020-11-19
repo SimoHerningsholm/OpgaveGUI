@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CLBL;
+using CLModels;
 
 namespace OpgaveGUIAfsluttende.UserControls
 {
@@ -21,17 +22,24 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class UpdateEmployeeFormField : UserControl
     {
+        private EmployeeRepository empRep;
+        private List<Employee> empList;
         public UpdateEmployeeFormField(EmployeeRepository rep)
         {
             InitializeComponent();
+            empRep = rep;
             setEmployeeFieldLabels();
+            loadEmployees();
         }
-
-        private void DeleteEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        private async void loadEmployees()
+        {
+            empList = await empRep.GetEmployees();
+            EmployeeViewerGrid.ItemsSource = empList;
+        }
+        private void EmployeeViewerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void EmployeeCompany_comboFieldChanged(object sender, EventArgs e)
         {
 
@@ -59,6 +67,10 @@ namespace OpgaveGUIAfsluttende.UserControls
             EmployeeDepartment.ComboFieldLabel.Content = "Jobtitle";
             EmployeeCompany.ComboFieldLabel.Content = "Company:";
             EmployeeDepartment.ComboFieldLabel.Content = "Department:";
+        }
+        private async void UpdateEmployeeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

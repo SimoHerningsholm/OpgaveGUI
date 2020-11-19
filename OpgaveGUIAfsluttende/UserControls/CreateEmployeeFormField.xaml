@@ -21,9 +21,9 @@
             <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
             <UserControls:TextField x:Name="EmployeeEmail" Height="35" Width="300"/>
             <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="300"/>
-            <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="300"/>
+            <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="300" comboFieldChanged="EmployeeJobTitle_comboFieldChanged"/>
             <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="300" comboFieldChanged="Company_ComboFieldChanged"/>
-            <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="300" Visibility="Hidden"/>
+            <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="300" comboFieldChanged="EmployeeDepartment_comboFieldChanged" Visibility="Hidden"/>
             <!-- Der laves en knap af typen createemployee som er en custom control.-->
             <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click" />
             <!-- En label udskriver om der har været success med oprettelse eller ej--> 
