@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CLModels;
 using CLValidator;
+using System.Data;
 
 namespace CLBL
 {
@@ -14,51 +15,33 @@ namespace CLBL
         //Denne her klasse er overordnet set bare en unødvendig mellemvej indtil der bliver implimenteret validering
         //eller anden funktionalitet data skal køres igennem før det lander i sine respektive endestationer.
         EmployeeDataHandler employeeBinder;
-        EmployeeFieldChecker employeeChecker;
-        List<string> employeeCheckerErrors;
         public EmployeeRepository()
         {
             //Instanciere datahandler
             employeeBinder = new EmployeeDataHandler();
-            employeeChecker = new EmployeeFieldChecker();
-            employeeCheckerErrors = new List<string>();
         }
-        public async Task<List<Employee>> getEmployees()
+        public async Task<List<Employee>> GetEmployees()
         {
             //Indtil videre returneres bare liste der er genereret i datalaget
-            return await employeeBinder.getEmployees();
+            return await employeeBinder.GetEmployees();
         }
-        public async Task<Employee> getEmployee()
+        public async Task<Employee> GetEmployee(int empId)
         {
             //Indtil videre returneres bare en enkelt employee fra liste i datalaget
-            return await employeeBinder.getEmployee();
+            return await employeeBinder.GetEmployee(empId);
         }
-        public async Task<bool> createEmployee(Employee employee)
+        public async Task<bool> CreateEmployee(Employee employee)
         {
             //Der sendes en ny employee ind i datalaget. Her skal der laves validering
-            if(await employeeChecker.Check(employee))
-            {
-                return await employeeBinder.createEmployee(employee);
-            }
-            else
-            {
-                employeeCheckerErrors = await employeeChecker.getErrorMessages();
-                return false;
-            }
+            return await employeeBinder.CreateEmployee(employee);
         }
-        public async Task<bool> updateEmployee()
+        public async Task<bool> UpdateEmployee(Employee employee)
         {
-            //Bliver først implementeret når der kommer SQL på.
-            return true;
+            return await employeeBinder.UpdateEmployee(employee);
         }
-        public async Task<bool> deleteEmployee()
+        public async Task<bool> DeleteEmployee(int empId)
         {
-            //bliver først implementeret når der kommer SQL på.
-            return true;
-        }
-        public List<string> getErrors()
-        {
-            return employeeCheckerErrors;
+            return await employeeBinder.DeleteEmployee(empId);
         }
     }
 }

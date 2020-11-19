@@ -23,9 +23,9 @@ namespace CLBL
         {
             return await departmentDH.GetDepartment(departmentId);
         }
-        public async Task<bool> CreateDepartment(Department inDepartment)
+        public async Task<bool> CreateDepartment(Department inDepartment, Employee inBoss)
         {
-            return await departmentDH.CreateDepartment(inDepartment);
+            return await departmentDH.CreateDepartment(inDepartment, inBoss);
         }
     }
 }

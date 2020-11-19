@@ -31,6 +31,11 @@
             <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="FontFamily" Value="arial" />
         </Style>
+        <Style x:Key="buttonStyles" TargetType="Button">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="Background" Value="#9CB290" />
+        </Style>
         <!-- Laver style for menubutton-->
         <Style x:Key="menuButton" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="15"></Setter>

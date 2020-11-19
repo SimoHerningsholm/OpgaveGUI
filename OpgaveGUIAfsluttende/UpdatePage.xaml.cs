@@ -18,9 +18,9 @@ namespace OpgaveGUIAfsluttende
     /// <summary>
     /// Interaction logic for UpdateEmployeePage.xaml
     /// </summary>
-    public partial class UpdateEmployeePage : Page
+    public partial class UpdatePage : Page
     {
-        public UpdateEmployeePage()
+        public UpdatePage()
         {
             InitializeComponent();
         }

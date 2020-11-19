@@ -19,7 +19,7 @@ namespace CLDB
         public DepartmentDataHandler()
         {
             //Instanciere properties der skal anvendes
-            connectionString = "Data Source=localhost;Initial Catalog=AdventureWorks2016CTP3;User ID=SA;Password=Test142536";
+            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
             conn = new SqlConnection(connectionString);
             departmentList = new List<Department>();
         }
@@ -74,7 +74,7 @@ namespace CLDB
             //Returnere modellisten uanset hvordan læsning af data er gået
             return null;
         }
-        public async Task<bool> CreateDepartment(Department inDep)
+        public async Task<bool> CreateDepartment(Department inDep, Employee inBoss)
         {
             //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
             SqlCommand cmd = new SqlCommand("CreateDepartment", conn);
@@ -82,13 +82,20 @@ namespace CLDB
             //værdier associeres med parametre for den ovenstående query  
             cmd.Parameters.AddWithValue("@Name", inDep.Name);
             cmd.Parameters.AddWithValue("@Company", inDep.CompanyId);
+           // cmd.Parameters.Add("@idOutput", SqlDbType.Int).Direction = ParameterDirection.Output;
             try
             {
                 //åbner forbindelse til databasen
                 await conn.OpenAsync();
+                int newDepartmentId= (int)await cmd.ExecuteScalarAsync();
                 //Eksekvere SQL op imod databasen
-                if (await cmd.ExecuteNonQueryAsync() == 1)
+                if (newDepartmentId > 1)
                 {
+                //    int newDepId = Convert.ToInt32(cmd.Parameters["@idOutput"].Value);
+                    //Laver employeedatahandler som skal opdatere medarbejder til at være boss for oprettet afdeling når department er oprettet
+                    EmployeeDataHandler emp = new EmployeeDataHandler();
+                    inBoss.Department = newDepartmentId;
+                    await emp.UpdateEmployee(inBoss);
                     //Lukker forbindelsen og returner at sql er eksekveret successfuldt
                     conn.Close();
                     return true;
@@ -100,7 +107,7 @@ namespace CLDB
                     return false;
                 }
             }
-            catch
+            catch(Exception e)
             {
                 //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
                 return false;

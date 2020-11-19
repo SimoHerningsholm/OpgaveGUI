@@ -1,4 +1,4 @@
-﻿<Page x:Class="OpgaveGUIAfsluttende.CreateEmployeePage"
+﻿<Page x:Class="OpgaveGUIAfsluttende.CreatePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,5 +14,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
+        <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="CreateEmployeeBtn" Content="Create Employee" HorizontalAlignment="Left"  Width="150" Click="CreateEmployeeBtn_Click"/>
+            <Button x:Name="CreateDepartmentBtn" Content="Create Department" HorizontalAlignment="Left"  Width="150" Click="CreateDepartmentBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -12,22 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CLBL;
 using OpgaveGUIAfsluttende.UserControls;
+using CLBL;
+
 namespace OpgaveGUIAfsluttende
 {
     /// <summary>
-    /// Interaction logic for CreateEmployeePage.xaml
+    /// Interaction logic for ViewEmployeePage.xaml
     /// </summary>
-    public partial class CreateEmployeePage : Page
+    public partial class ViewPage : Page
     {
-        public CreateEmployeePage(EmployeeRepository inRep)
+        public ViewPage(EmployeeRepository inRep)
         {
             InitializeComponent();
-            CreateEmployeeFormField createForm = new CreateEmployeeFormField(inRep);
-            createForm.Height = 340;
-            createForm.Width = 300;
-            viewGrid.Children.Add(createForm);
+            ViewEmployeeFormField viewfield = new ViewEmployeeFormField(inRep);
+            viewfield.HorizontalAlignment = HorizontalAlignment.Center;
+            viewfield.VerticalAlignment = VerticalAlignment.Center;
+            viewfield.Height = 400;
+            viewfield.Width = 650;
+            viewgrid.Children.Add(viewfield);
+
         }
     }
 }

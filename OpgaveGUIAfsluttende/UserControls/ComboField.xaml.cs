@@ -18,32 +18,32 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// <summary>
     /// Interaction logic for EmployeeComboField.xaml
     /// </summary>
-    public partial class EmployeeComboField : UserControl
+    public partial class ComboField : UserControl
     {
         public bool selectedChanged;
         //Laver en eventhandler der skal modtage comboboks selectionchanged event
-        public event EventHandler EmployeeComboFieldChanged;
-        public EmployeeComboField()
+        public event EventHandler comboFieldChanged;
+        public ComboField()
         {
             InitializeComponent();
             //Hvis selection på comboboksen ændre sig, skal employeeComboFieldSelectionChanged metoden eksekveres.
-            this.employeeComboField.SelectionChanged += new SelectionChangedEventHandler(this.employeeComboFieldSelectionChanged);
+            this.ComboBoxField.SelectionChanged += new SelectionChangedEventHandler(this.ComboFieldSelectionChanged);
         }
-        protected void employeeComboFieldSelectionChanged(object sender, EventArgs e)
+        protected void ComboFieldSelectionChanged(object sender, EventArgs e)
         {
             //Eksekveres denne metode eksekveres eventet såfremt eventet er sat
-            EmployeeComboFieldChanged?.Invoke(sender, e);
+            comboFieldChanged?.Invoke(sender, e);
         }
-        private void employeeComboField_GotFocus(object sender, RoutedEventArgs e)
+        private void ComboField_GotFocus(object sender, RoutedEventArgs e)
         {
             //Modtager comboboks fokus skal fontweight på label være bold
-            employeeComboFieldLabel.FontWeight = FontWeights.Bold;
+            ComboFieldLabel.FontWeight = FontWeights.Bold;
         }
 
-        private void employeeComboField_LostFocus(object sender, RoutedEventArgs e)
+        private void ComboField_LostFocus(object sender, RoutedEventArgs e)
         {
             //Mister comboboks fokus skal fontweight på label være normal
-            employeeComboFieldLabel.FontWeight = FontWeights.Normal;
+            ComboFieldLabel.FontWeight = FontWeights.Normal;
         }
     }
 }

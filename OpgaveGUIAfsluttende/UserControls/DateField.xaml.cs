@@ -18,23 +18,23 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// <summary>
     /// Interaction logic for EmployeeDateField.xaml
     /// </summary>
-    public partial class EmployeeDateField : UserControl
+    public partial class DateField : UserControl
     {
-        public EmployeeDateField()
+        public DateField()
         {
             InitializeComponent();
         }
 
-        private void employeeDateField_GotFocus(object sender, RoutedEventArgs e)
+        private void DateField_GotFocus(object sender, RoutedEventArgs e)
         {
             //Modtager datepicker fokus skal fontweight på label være bold
-            employeeDateFieldLabel.FontWeight = FontWeights.Bold;
+            DateFieldLabel.FontWeight = FontWeights.Bold;
         }
 
-        private void employeeDateField_LostFocus(object sender, RoutedEventArgs e)
+        private void DateField_LostFocus(object sender, RoutedEventArgs e)
         {
             //Mister datepicker fokus skal fontweight på label være normal
-            employeeDateFieldLabel.FontWeight = FontWeights.Normal;
+            DateFieldLabel.FontWeight = FontWeights.Normal;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="OpgaveGUIAfsluttende.UserControls.EmployeeComboField"
+﻿<UserControl x:Class="OpgaveGUIAfsluttende.UserControls.ComboField"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,9 +10,9 @@
         <!-- Opsætter label og comboboks med dockpanel da stackpanel med horizontal orientation ikke opfangede alignment properties-->
         <DockPanel>
             <!-- Laver en label der stiles af labelstyle fra app resources-->
-            <Label Style="{StaticResource labelStyle}" x:Name="employeeComboFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
+            <Label Style="{StaticResource labelStyle}" x:Name="ComboFieldLabel" Content="default" Width="auto" Height="30" HorizontalAlignment="Left" />
             <!-- Laver en comboboks som stiles af combostyle fra app resources. Derudover har den focus events associeret med henblik på at fremhæve label ved focus-->
-            <ComboBox Style="{StaticResource comboStyles}" x:Name="employeeComboField" Width="200" Height="30" GotFocus="employeeComboField_GotFocus" LostFocus="employeeComboField_LostFocus" HorizontalAlignment="Right" />
+            <ComboBox Style="{StaticResource comboStyles}" x:Name="ComboBoxField" Width="200" Height="30" GotFocus="ComboField_GotFocus" LostFocus="ComboField_LostFocus" HorizontalAlignment="Right" />
         </DockPanel>
     </Grid>
 </UserControl>

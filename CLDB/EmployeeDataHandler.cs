@@ -18,14 +18,14 @@ namespace CLDB
         public EmployeeDataHandler()
         {
             //Generere en liste af employee objekter der kan simulere database data i frontend
-            connectionString = "Data Source=localhost;Initial Catalog=AdventureWorks2016CTP3;User ID=SA;Password=Test142536";
+            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
             conn = new SqlConnection(connectionString);
             employeeList = new List<Employee>();
         }
         public async Task<List<Employee>> GetEmployees()
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
-            SqlCommand cmd = new SqlCommand("AllEmployeesView", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM AllEmployeesView", conn);
             try
             {
                 //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
@@ -57,7 +57,7 @@ namespace CLDB
         public async Task<Employee> GetEmployee(int id)
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
-            SqlCommand cmd = new SqlCommand("AllEmployeesView", conn);
+            SqlCommand cmd = new SqlCommand("GetEmployeeView", conn);
             try
             {
                 //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.

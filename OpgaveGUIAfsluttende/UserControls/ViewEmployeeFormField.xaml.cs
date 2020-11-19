@@ -41,7 +41,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         public async void loadEmployees()
         {
         //Sætter gridview til at indeholde liste over employees der hentes fra businesslogic laget.
-            empList = await empRep.getEmployees();
+            empList = await empRep.GetEmployees();
             EmployeeViewerGrid.ItemsSource = empList;
           //  EmployeeViewerGrid.ItemsSource = empList;
         }
@@ -62,7 +62,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             QueryOptionResultList.Items.Clear();
             //indtil videre kommer der bare en liste over employee id'er der kan queries på.
             //Når der kommer SQL ind over skal der queries data der ligger i forlængelse af valget
-            List<Employee> employees = await empRep.getEmployees();
+            List<Employee> employees = await empRep.GetEmployees();
             for (int i = 0; i < employees.Count; i++)
             {
                 QueryOptionResultList.Items.Add(employees[i].Id);

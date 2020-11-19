@@ -27,13 +27,13 @@
             <Image Grid.Column="1" x:Name="LogoPicture" Width="180" Height="50" Source="Pictures/Logo2.png" VerticalAlignment="Center" />
         </Grid>
         <!-- Indsætter et frame som forskellige sider kan loades ind i på basis af clickevents -->
-        <Frame NavigationUIVisibility="Hidden" x:Name="contentFrame" Content="Frame" Grid.Row="1" Width="800" Grid.ColumnSpan="2" Margin="0,0,-8,0"/>
+        <Frame NavigationUIVisibility="Hidden" x:Name="contentFrame" Content="Frame" Grid.Row="1" Height="400" Width="800" Grid.ColumnSpan="2"/>
         <!-- Laver en menu som består af et stackpanel hvori der placeres knapper som modtager en menubutton style fra app resources -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="-4,0">
-            <Button Style="{StaticResource menuButton}" x:Name="viewEmployees" Content="View employees" Width="200" Click="ViewEmployees_Click"  />
-            <Button Style="{StaticResource menuButton}" x:Name="createEmployees" Content="Create employees" Width="200" Click="CreateEmployees_Click"/>
-            <Button Style="{StaticResource menuButton}" x:Name="updateEmployees" Content="Update employees" Width="200" Click="updateEmployees_Click"/>
-            <Button Style="{StaticResource menuButton}" x:Name="deleteEmployees" Content="Delete employees" Width="200" Click="deleteEmployees_Click"/>
+            <Button Style="{StaticResource menuButton}" x:Name="viewEmployees" Content="View" Width="200" Click="View_Click"  />
+            <Button Style="{StaticResource menuButton}" x:Name="create" Content="Create" Width="200" Click="Create_Click"/>
+            <Button Style="{StaticResource menuButton}" x:Name="update" Content="Update" Width="200" Click="update_Click"/>
+            <Button Style="{StaticResource menuButton}" x:Name="delete" Content="Delete" Width="200" Click="delete_Click"/>
         </StackPanel>
     </Grid>
 </Window>

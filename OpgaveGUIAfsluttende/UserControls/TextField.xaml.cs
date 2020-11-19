@@ -18,23 +18,23 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// <summary>
     /// Interaction logic for EmployeeTextField.xaml
     /// </summary>
-    public partial class EmployeeTextField : UserControl
+    public partial class TextField : UserControl
     {
-        public EmployeeTextField()
+        public TextField()
         {
             InitializeComponent();
         }
 
-        private void employeeTextField_GotFocus(object sender, RoutedEventArgs e)
+        private void TextField_GotFocus(object sender, RoutedEventArgs e)
         {
             //Modtager tekstboks fokus skal fontweight på label være bold
-            employeeTextFieldLabel.FontWeight = FontWeights.Bold;
+            TextFieldLabel.FontWeight = FontWeights.Bold;
         }
 
-        private void employeeTextField_LostFocus(object sender, RoutedEventArgs e)
+        private void TextField_LostFocus(object sender, RoutedEventArgs e)
         {
             //Mister comboboks fokus skal fontweight på label være bold
-            employeeTextFieldLabel.FontWeight = FontWeights.Normal;
+            TextFieldLabel.FontWeight = FontWeights.Normal;
         }
     }
 }

@@ -9,11 +9,11 @@ namespace CLBL.Interfaces
 {
     interface IEmployeeRepository
     {
-        Task<List<Employee>> getEmployees();
-        Task<Employee> getEmployee();
-        Task<bool> createEmployee(Employee employee);
-        Task<bool> updateEmployee();
-        Task<bool> deleteEmployee();
+        Task<List<Employee>> GetEmployees();
+        Task<Employee> GetEmployee(int employeeId);
+        Task<bool> CreateEmployee(Employee employee);
+        Task<bool> UpdateEmployee(Employee employee);
+        Task<bool> DeleteEmployee(int employeeId);
 
     }
 }

@@ -18,9 +18,9 @@ namespace OpgaveGUIAfsluttende
     /// <summary>
     /// Interaction logic for DeleteEmployeePage.xaml
     /// </summary>
-    public partial class DeleteEmployeePage : Page
+    public partial class DeletePage : Page
     {
-        public DeleteEmployeePage()
+        public DeletePage()
         {
             InitializeComponent();
         }

@@ -19,14 +19,14 @@ namespace CLDB
         public CompanyDataHandler()
         {
             //Instanciere properties der skal anvendes
-            connectionString = "Data Source=localhost;Initial Catalog=AdventureWorks2016CTP3;User ID=SA;Password=Test142536";
+            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
             conn = new SqlConnection(connectionString);
             companyList = new List<Company>();
         }
         public async Task<List<Company>> getCompanies()
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
-            SqlCommand cmd = new SqlCommand("AllDepartmentsView", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM AllCompaniesView", conn);
             try
             {
                 //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
@@ -37,7 +37,7 @@ namespace CLDB
                     Company tempComp = new Company();
                     tempComp.Id = (int)reader["Id"];
                     tempComp.Name = (string)reader["Name"];
-                    tempComp.Address = (string)reader["Address"];
+                    tempComp.Address = (int)reader["Address"];
                     companyList.Add(tempComp);
                 }
                 conn.Close();
@@ -63,7 +63,7 @@ namespace CLDB
                 Company comp = new Company();
                 comp.Id = (int)reader["Id"];
                 comp.Name = (string)reader["Name"];
-                comp.Address = (string)reader["Address"];
+                comp.Address = (int)reader["Address"];
                 conn.Close();
                 return comp;
             }

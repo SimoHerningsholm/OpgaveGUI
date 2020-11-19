@@ -1,0 +1,17 @@
+﻿<Page x:Class="OpgaveGUIAfsluttende.ViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OpgaveGUIAfsluttende"
+      xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls" 
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="ViewPage">
+    <Grid x:Name="viewgrid">
+        <!-- indtil videre er det bare en side der loader usercontrol gennem koden. På sigt kan det eventuelt blive en side hvor man kan loade forskellige viewforms ind i.-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400" />
+        </Grid.RowDefinitions>
+    </Grid>
+</Page>

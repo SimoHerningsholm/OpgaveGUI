@@ -14,19 +14,19 @@
             <!-- Laver overskrift som stiles af textblockstyle fra app resources-->
             <TextBlock Style="{StaticResource textBlockStyle}" Text="Create employee form"  Width="300" Height="30"></TextBlock>
             <!-- Anvender en usercontrol til hvert form felt. Der er usercontrol til textbox, til datetimepicker og til comboboks-->
-            <UserControls:EmployeeTextField x:Name="EmployeeName" Height="35" Width="300"/>
-            <UserControls:EmployeeTextField x:Name="EmployeeAddress" Height="35" Width="300"/>
-            <UserControls:EmployeeTextField x:Name="EmployeeZipCode" Height="35" Width="300"/>
-            <UserControls:EmployeeDateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeeName" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeeAddress" Height="35" Width="300"/>
+            <UserControls:TextField x:Name="EmployeeZipCode" Height="35" Width="300"/>
+            <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
             <!-- Den nederste comboboks er usynlig indtil der er sat en værdi med den første comboboks (man skal vælge firma før man får lov at vælge afdeling-->
             <!-- Dette gøres ved at anvende en manuelt oprettet eventhandler der registrere selectionchanged event inde i comboboks usercontrol--> 
-            <UserControls:EmployeeComboField x:Name="EmployeeCompany"  Height="35" Width="300" EmployeeComboFieldChanged="EmployeeCompany_EmployeeComboFieldChanged"/>
-            <UserControls:EmployeeComboField x:Name="EmployeeDepartment" Height="35" Width="300" Visibility="Hidden"/>
+            <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="300" comboFieldChanged="Company_ComboFieldChanged"/>
+            <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="300" Visibility="Hidden"/>
             <!-- Der laves en knap af typen createemployee som er en custom control.-->
             <custom:CreateEmployee Content="Create employee" Click="CreateEmployee_Click" />
             <!-- En label udskriver om der har været success med oprettelse eller ej--> 
             <Label x:Name="statusLabel"></Label>
-            <UserControls:EmployeeComboField x:Name="EmployeeErrors" Height="35" Width="300" Visibility="Hidden" />
+            <UserControls:ComboField x:Name="EmployeeErrors" Height="35" Width="300" Visibility="Hidden" />
         </StackPanel>
     </Grid>
 </UserControl>
