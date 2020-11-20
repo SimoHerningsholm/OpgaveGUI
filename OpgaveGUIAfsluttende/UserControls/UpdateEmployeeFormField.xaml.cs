@@ -22,6 +22,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class UpdateEmployeeFormField : UserControl
     {
+        private int employeeId;
         private int chosenZipCode;
         private int chosenCompanyId;
         private int chosenJobTitle;
@@ -62,30 +63,50 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void UpdateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                //Efter objektet er lavet valideres der på om employee er oprettet
+                Employee updateEmp = new Employee();
+                updateEmp.Id = employeeId;
+                updateEmp.FirstName = EmployeeFirstName.TextBoxField.Text;
+                updateEmp.LastName = EmployeeLastName.TextBoxField.Text;
+                updateEmp.Address = int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
+                updateEmp.BirthDay = Convert.ToDateTime(EmployeeBirthDay.DatePickField.Text);
+                updateEmp.Email = EmployeeEmail.TextBoxField.Text;
+                updateEmp.Phone = int.Parse(EmployeePhone.TextBoxField.Text);
+                updateEmp.Department = chosendepartment;
+                updateEmp.JobTitle = chosenJobTitle;
+                await empRep.UpdateEmployee(updateEmp);
+                statusLabel.Content = "Success";
+            }
+            catch(Exception errorMsg)
+            {
+                statusLabel.Content = "error";
+            }
         }
         private async void loadEmployees()
         {
             empList = await empRep.GetEmployees();
             EmployeeViewerGrid.ItemsSource = empList;
         }
-        private void EmployeeViewerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void EmployeeViewerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            employeeId = int.Parse((EmployeeViewerGrid.SelectedCells[0].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
             EmployeeFirstName.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[1].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
             EmployeeLastName.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[2].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
-            EmployeeStreet.TextBoxField.Text = getStreetFromAdress(int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
+            SetStreetAndZipCodeFromAdress(int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
+            EmployeeBirthDay.DatePickField.Text = (EmployeeViewerGrid.SelectedCells[5].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
             EmployeeEmail.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[5].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
             EmployeePhone.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[6].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
+            chosendepartment = int.Parse((EmployeeViewerGrid.SelectedCells[7].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
+            chosenJobTitle = int.Parse((EmployeeViewerGrid.SelectedCells[8].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
         }
 
-        private string getStreetFromAdress(int addressId)
+        private async void SetStreetAndZipCodeFromAdress(int addressId)
         {
-
-            return "";
-        }
-        private string getZipCodeFromAdress()
-        {
-            return "";
+            Address newAddr = await addRep.getAddressFromId(addressId);
+            EmployeeStreet.TextBoxField.Text = newAddr.Street;
+            chosenZipCode = newAddr.ZipCode;
         }
         private async void setEmployeeFieldLabels()
         {

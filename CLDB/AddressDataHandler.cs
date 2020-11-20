@@ -54,10 +54,10 @@ namespace CLDB
                 return 0;
             }
         }
-        public async Task<string> getStreetFromAddressId(int id)
+        public async Task<Address> getAddressFromId(int id)
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
-            SqlCommand cmd = new SqlCommand("GetStreetFromAddress", conn);
+            SqlCommand cmd = new SqlCommand("GetAddressFromId", conn);
             try
             {
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -66,9 +66,11 @@ namespace CLDB
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
-                string street = (string)reader["Street"];
+                Address newAddr = new Address();
+                newAddr.Street = (string)reader["Street"];
+                newAddr.ZipCode = (int)reader["Zipcode"];
                 conn.Close();
-                return street;
+                return newAddr;
             }
             catch (Exception e) //Er der gået noget galt laves en exception
             {
@@ -76,5 +78,6 @@ namespace CLDB
             }
             //Returnere modellisten uanset hvordan læsning af data er gået
         }
+
     }
 }

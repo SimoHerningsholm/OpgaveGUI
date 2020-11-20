@@ -18,11 +18,11 @@ namespace CLBL
             AddressDataHandler addr = new AddressDataHandler();
             return await addr.CreateAddress(inAddr);
         }
-        public async Task<string> getStreetFromAddress(int addressId)
+        public async Task<Address> getAddressFromId(int addressId)
         {
             //Modtager gadenavn på en valgt adresse i updatemodul
             AddressDataHandler addr = new AddressDataHandler();
-            return await addr.getStreetFromAddressId(addressId);
+            return await addr.getAddressFromId(addressId);
         }
     }
 }

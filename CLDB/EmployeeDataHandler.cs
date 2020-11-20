@@ -140,6 +140,7 @@ namespace CLDB
             {
                 //åbner forbindelse til databasen
                 await conn.OpenAsync();
+
                 //Eksekvere SQL op imod databasen
                 if (await cmd.ExecuteNonQueryAsync() == 1)
                 {
