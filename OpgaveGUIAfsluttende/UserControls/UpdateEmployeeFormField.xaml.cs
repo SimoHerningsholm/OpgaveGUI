@@ -100,6 +100,14 @@ namespace OpgaveGUIAfsluttende.UserControls
             EmployeePhone.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[6].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
             chosendepartment = int.Parse((EmployeeViewerGrid.SelectedCells[7].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
             chosenJobTitle = int.Parse((EmployeeViewerGrid.SelectedCells[8].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
+            EmployeeDepartment.ComboBoxField.SelectedIndex = 2;
+        /*    for (int i = 0; i < departments.Count; i++)
+            {
+                if((string)EmployeeDepartment.ComboBoxField.Items[i] == "Manager")
+                {
+                    EmployeeDepartment.ComboBoxField.SelectedIndex = i + 1;
+                }
+            }*/
         }
 
         private async void SetStreetAndZipCodeFromAdress(int addressId)
