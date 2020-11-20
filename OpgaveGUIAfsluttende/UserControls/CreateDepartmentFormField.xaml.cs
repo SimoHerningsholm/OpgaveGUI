@@ -29,12 +29,12 @@ namespace OpgaveGUIAfsluttende.UserControls
         private List<Employee> potentialBosses;
         private List<Company> PotentialCompanies;
         private Employee chosenBoss;
-        public CreateDepartmentFormField(EmployeeRepository rep)
+        public CreateDepartmentFormField()
         {
             InitializeComponent();
             depRep = new DepartmentRepository();
             compRep = new CompanyRepository();
-            empRep = rep;
+            empRep = new EmployeeRepository();
             chosenBoss = new Employee();
             potentialBosses = new List<Employee>();
             PotentialCompanies = new List<Company>();

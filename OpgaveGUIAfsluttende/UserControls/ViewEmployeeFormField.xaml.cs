@@ -23,11 +23,11 @@ namespace OpgaveGUIAfsluttende.UserControls
     {
         private EmployeeRepository empRep;
         private List<Employee> empList;
-        public ViewEmployeeFormField(EmployeeRepository empRep)
+        public ViewEmployeeFormField()
         {
             InitializeComponent();
             //Employee Repository instancieres og emloyees loades i grid og comboboks fyldes med gyldige værdier (når der kommer SQL på)
-            this.empRep = empRep;
+            this.empRep = new EmployeeRepository();
             empList = new List<Employee>();
             loadEmployees();
             loadComboOptions();

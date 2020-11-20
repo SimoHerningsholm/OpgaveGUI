@@ -22,15 +22,13 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class UpdatePage : Page
     {
-        private EmployeeRepository rep;
-        public UpdatePage(EmployeeRepository inRep)
+        public UpdatePage()
         {
             InitializeComponent();
-            rep = inRep;
         }
         private void UpdateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            UpdateEmployeeFormField updateForm = new UpdateEmployeeFormField(rep);
+            UpdateEmployeeFormField updateForm = new UpdateEmployeeFormField();
             updateForm.Height = 530;
             updateForm.Width = 800;
             viewGrid.Children.Add(updateForm);

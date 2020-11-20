@@ -22,10 +22,10 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class ViewPage : Page
     {
-        public ViewPage(EmployeeRepository inRep)
+        public ViewPage()
         {
             InitializeComponent();
-            ViewEmployeeFormField viewfield = new ViewEmployeeFormField(inRep);
+            ViewEmployeeFormField viewfield = new ViewEmployeeFormField();
             viewfield.HorizontalAlignment = HorizontalAlignment.Center;
             viewfield.VerticalAlignment = VerticalAlignment.Center;
             viewfield.Height = 400;

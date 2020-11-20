@@ -17,7 +17,7 @@
             <UserControls:TextField x:Name="EmployeeFirstName" Height="35" Width="300"/>
             <UserControls:TextField x:Name="EmployeeLastName" Height="35" Width="300"/>
             <UserControls:TextField x:Name="EmployeeStreet" Height="35" Width="300"/>
-            <UserControls:ComboField x:Name="EmployeeZipCode" Height="35" Width="300"/>
+            <UserControls:ComboField x:Name="EmployeeZipCode" Height="35" Width="300" comboFieldChanged="EmployeeZipCode_comboFieldChanged"/>
             <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
             <UserControls:TextField x:Name="EmployeeEmail" Height="35" Width="300"/>
             <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="300"/>

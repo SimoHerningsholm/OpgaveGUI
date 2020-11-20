@@ -22,15 +22,13 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class DeletePage : Page
     {
-        private EmployeeRepository rep;
-        public DeletePage(EmployeeRepository inRep)
+        public DeletePage()
         {
             InitializeComponent();
-            rep = inRep;
         }
         private void DeleteEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            DeleteEmployeeFormField deleteForm = new DeleteEmployeeFormField(rep);
+            DeleteEmployeeFormField deleteForm = new DeleteEmployeeFormField();
             deleteForm.Height = 530;
             deleteForm.Width = 650;
             viewGrid.Children.Add(deleteForm);

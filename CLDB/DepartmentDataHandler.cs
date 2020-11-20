@@ -49,6 +49,34 @@ namespace CLDB
             //Returnere modellisten uanset hvordan læsning af data er gået
             return departmentList;
         }
+        public async Task<List<Department>> GetDepartmentsFromCompanyId(int CompanyId)
+        {
+            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            SqlCommand cmd = new SqlCommand("GetDepartmentsFromCompany", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@companyId", CompanyId);
+            try
+            {
+                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                await conn.OpenAsync();
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    Department tempDep = new Department();
+                    tempDep.Id = (int)reader["Id"];
+                    tempDep.Name = (string)reader["Name"];
+                    tempDep.CompanyId = (int)reader["Company"];
+                    departmentList.Add(tempDep);
+                }
+                conn.Close();
+            }
+            catch (Exception e) //Er der gået noget galt laves en exception
+            {
+                departmentList = null;
+            }
+            //Returnere modellisten uanset hvordan læsning af data er gået
+            return departmentList;
+        }
         public async Task<Department> GetDepartment(int departmentId)
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
@@ -66,7 +94,7 @@ namespace CLDB
                 dep.CompanyId = (int)reader["Company"];
                 conn.Close();
                 return dep;
-            }    
+            }
             catch (Exception e) //Er der gået noget galt laves en exception
             {
                 departmentList = null;
@@ -82,16 +110,16 @@ namespace CLDB
             //værdier associeres med parametre for den ovenstående query  
             cmd.Parameters.AddWithValue("@Name", inDep.Name);
             cmd.Parameters.AddWithValue("@Company", inDep.CompanyId);
-           // cmd.Parameters.Add("@idOutput", SqlDbType.Int).Direction = ParameterDirection.Output;
+            // cmd.Parameters.Add("@idOutput", SqlDbType.Int).Direction = ParameterDirection.Output;
             try
             {
                 //åbner forbindelse til databasen
                 await conn.OpenAsync();
-                int newDepartmentId= (int)await cmd.ExecuteScalarAsync();
+                int newDepartmentId = (int)await cmd.ExecuteScalarAsync();
                 //Eksekvere SQL op imod databasen
                 if (newDepartmentId > 1)
                 {
-                //    int newDepId = Convert.ToInt32(cmd.Parameters["@idOutput"].Value);
+                    //    int newDepId = Convert.ToInt32(cmd.Parameters["@idOutput"].Value);
                     //Laver employeedatahandler som skal opdatere medarbejder til at være boss for oprettet afdeling når department er oprettet
                     EmployeeDataHandler emp = new EmployeeDataHandler();
                     inBoss.Department = newDepartmentId;
@@ -107,7 +135,7 @@ namespace CLDB
                     return false;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
                 return false;

@@ -19,6 +19,10 @@ namespace CLBL
         {
             return await departmentDH.GetDepartments();
         }
+        public async Task<List<Department>> GetDepartmentsFromCompany(int companyId)
+        {
+            return await departmentDH.GetDepartmentsFromCompanyId(companyId);
+        }
         public async Task<Department> GetDepartment(int departmentId)
         {
             return await departmentDH.GetDepartment(departmentId);

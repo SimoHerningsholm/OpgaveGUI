@@ -40,7 +40,7 @@
                 <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="275"/>
                 <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="275"/>
                 <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="275" comboFieldChanged="EmployeeCompany_comboFieldChanged"/>
-                <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="275" comboFieldChanged="EmployeeDepartment_comboFieldChanged" Visibility="Hidden"/>
+                <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="275" comboFieldChanged="EmployeeDepartment_comboFieldChanged"/>
                 <!-- Der laves en knap af typen createemployee som er en custom control.-->
                 <Button Style="{StaticResource buttonStyles}" x:Name="UpdateEmployeeBtn" Content="Update Employee" Width="160" Height="30" Click="UpdateEmployeeBtn_Click"></Button>
                 <!-- En label udskriver om der har været success med oprettelse eller ej-->

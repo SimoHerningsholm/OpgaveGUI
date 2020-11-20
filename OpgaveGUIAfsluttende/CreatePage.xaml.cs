@@ -21,15 +21,13 @@ namespace OpgaveGUIAfsluttende
     /// </summary>
     public partial class CreatePage : Page
     {
-        private EmployeeRepository rep;
-        public CreatePage(EmployeeRepository inRep)
+        public CreatePage()
         {
             InitializeComponent();
-            rep = inRep;
         }
         private void CreateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            CreateEmployeeFormField createForm = new CreateEmployeeFormField(rep);
+            CreateEmployeeFormField createForm = new CreateEmployeeFormField();
             createForm.Height = 480;
             createForm.Width = 300;
             viewGrid.Children.Add(createForm);
@@ -37,7 +35,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
-            CreateDepartmentFormField createForm = new CreateDepartmentFormField(rep);
+            CreateDepartmentFormField createForm = new CreateDepartmentFormField();
             createForm.Height = 480;
             createForm.Width = 300;
             viewGrid.Children.Add(createForm);
