@@ -11,20 +11,20 @@ namespace CLDB
 {
     public class EmployeeDataHandler
     {
-        //Deklerere liste af testemployees
+        //Properties der skal anvendes
         private string connectionString;
         private SqlConnection conn;
         private List<Employee> employeeList;
         public EmployeeDataHandler()
         {
-            //Generere en liste af employee objekter der kan simulere database data i frontend
+            //sætter connectionstring og laver en connection med connectionstring
             connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Simon\\Source\\Repos\\OpgaveGUIAfsluttende\\OpgaveGUIAfsluttende\\AfsluttendeDB.mdf;Integrated Security=True";
             conn = new SqlConnection(connectionString);
             employeeList = new List<Employee>();
         }
         public async Task<List<Employee>> GetEmployees()
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får query
             SqlCommand cmd = new SqlCommand("SELECT * FROM AllEmployeesView", conn);
             try
             {
@@ -56,7 +56,7 @@ namespace CLDB
         }
         public async Task<Employee> GetEmployee(int id)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetEmployeeView", conn);
             try
             {
@@ -85,7 +85,7 @@ namespace CLDB
         }
         public async Task<bool> CreateEmployee(Employee inEmp)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("CreateEmployee", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query  
@@ -123,7 +123,7 @@ namespace CLDB
         }
         public async Task<bool> UpdateEmployee(Employee inEmp)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("UpdateEmployee", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query  
@@ -163,7 +163,7 @@ namespace CLDB
         }
         public async Task<bool> DeleteEmployee(int empId)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("DeleteEmployee", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query  

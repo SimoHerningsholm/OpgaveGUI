@@ -27,6 +27,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void CreateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Laver en specifikt FormField og dimensionere det og putter det i viewgrid
             CreateEmployeeFormField createForm = new CreateEmployeeFormField();
             createForm.Height = 480;
             createForm.Width = 300;
@@ -35,6 +36,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Laver en specifikt FormField og dimensionere det og putter det i viewgrid
             CreateDepartmentFormField createForm = new CreateDepartmentFormField();
             createForm.Height = 480;
             createForm.Width = 1000;
@@ -43,6 +45,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void hideBtns()
         {
+            //Når man har loadet form ind i grid skal knapper gøres usyndlig
             CreateDepartmentBtn.Visibility = Visibility.Hidden;
             CreateEmployeeBtn.Visibility = Visibility.Hidden;
         }

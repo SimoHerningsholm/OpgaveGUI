@@ -25,6 +25,7 @@ namespace OpgaveGUIAfsluttende
         public ViewPage()
         {
             InitializeComponent();
+            //Laver en specifikt FormField og dimensionere det og putter det i viewgrid
             ViewEmployeeFormField viewfield = new ViewEmployeeFormField();
             viewfield.HorizontalAlignment = HorizontalAlignment.Center;
             viewfield.VerticalAlignment = VerticalAlignment.Center;

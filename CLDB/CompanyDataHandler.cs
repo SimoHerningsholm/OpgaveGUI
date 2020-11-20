@@ -25,7 +25,7 @@ namespace CLDB
         }
         public async Task<List<Company>> getCompanies()
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får query
             SqlCommand cmd = new SqlCommand("SELECT * FROM AllCompaniesView", conn);
             try
             {
@@ -51,12 +51,12 @@ namespace CLDB
         }
         public async Task<Company> GetCompany(int companyId)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetCompanyView", conn);
             cmd.Parameters.AddWithValue("@companyId", companyId);
             try
             {
-                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                //Åbner forbindelse og laver modelobjekt der returneres tilbage hvis process er successfuld
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
@@ -76,13 +76,13 @@ namespace CLDB
         }
         public async Task<Company> GetCompanyFromDepartmentId(int departmentId)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetCompanyFromDepartmentId", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Id", departmentId);
             try
             {
-                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                //Åbner forbindelse og laver modelobjekt der returneres tilbage hvis process er successfuld
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
@@ -102,7 +102,7 @@ namespace CLDB
         }
         public async Task<bool> CreateCompany(Company inComp)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("CreateCompany", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query  
@@ -112,7 +112,7 @@ namespace CLDB
             {
                 //åbner forbindelse til databasen
                 await conn.OpenAsync();
-                //Eksekvere SQL op imod databasen
+                //Eksekvere SQL op imod databasen, hvis det er successfuldt returneres at process er eksekveret successfuldt eller at det er eksekveret med error
                 if (await cmd.ExecuteNonQueryAsync() == 1)
                 {
                     //Lukker forbindelsen og returner at sql er eksekveret successfuldt

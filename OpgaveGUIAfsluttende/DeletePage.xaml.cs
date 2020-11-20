@@ -28,6 +28,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void DeleteEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Laver en specifikt FormField og dimensionere det og putter det i viewgrid
             DeleteEmployeeFormField deleteForm = new DeleteEmployeeFormField();
             deleteForm.Height = 530;
             deleteForm.Width = 1000;
@@ -36,6 +37,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void hideBtns()
         {
+            //Når man har loadet form ind i grid skal knapper gøres usyndlig
             DeleteEmployeeBtn.Visibility = Visibility.Hidden;
         }
     }

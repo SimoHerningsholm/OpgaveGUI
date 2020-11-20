@@ -22,25 +22,27 @@ namespace CLBL
         }
         public async Task<List<Employee>> GetEmployees()
         {
-            //Indtil videre returneres bare liste der er genereret i datalaget
+            //Kalder metode på employeedatahadlerobjekt der returnere en liste af employees
             return await employeeBinder.GetEmployees();
         }
         public async Task<Employee> GetEmployee(int empId)
         {
-            //Indtil videre returneres bare en enkelt employee fra liste i datalaget
+            //Kalder metode på employeedatahandlerobjekt der returnere en employee på basis af id givet som argument
             return await employeeBinder.GetEmployee(empId);
         }
         public async Task<bool> CreateEmployee(Employee employee)
         {
-            //Der sendes en ny employee ind i datalaget. Her skal der laves validering
+            //Der sendes en ny employee ind i datalaget til oprettelse
             return await employeeBinder.CreateEmployee(employee);
         }
         public async Task<bool> UpdateEmployee(Employee employee)
         {
+            //Der sendes en ny employee ind i datalaget til opdatering
             return await employeeBinder.UpdateEmployee(employee);
         }
         public async Task<bool> DeleteEmployee(int empId)
         {
+            //Der kaldes deleteemployee metoden på employeedatahandler som modtager id på employee der skal slettes
             return await employeeBinder.DeleteEmployee(empId);
         }
     }

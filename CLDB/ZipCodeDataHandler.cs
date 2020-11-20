@@ -24,7 +24,7 @@ namespace CLDB
         }
         public async Task<List<ZipCode>> getZipCodes()
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får query
             SqlCommand cmd = new SqlCommand("SELECT * FROM AllZipCodes", conn);
             try
             {

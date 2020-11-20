@@ -17,9 +17,10 @@ namespace CLDB
         private List<JobTitle> jobTitleList;
         public JobTitleDataHandler()
         {
-            //Generere en liste af employee objekter der kan simulere database data i frontend
+            //sætter connectionstring og laver en connection med connectionstring
             connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Simon\\Source\\Repos\\OpgaveGUIAfsluttende\\OpgaveGUIAfsluttende\\AfsluttendeDB.mdf;Integrated Security=True";
             conn = new SqlConnection(connectionString);
+            //Instanciere en liste af jobtitle modeller der kan sendes tilbage
             jobTitleList = new List<JobTitle>();
         }
         public async Task<List<JobTitle>> getJobTitles()
@@ -49,7 +50,7 @@ namespace CLDB
         }
         public async Task<JobTitle> GetJobTitle(int jobTitleId)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetJobTitleFromId", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Id", jobTitleId);

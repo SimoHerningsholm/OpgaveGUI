@@ -14,6 +14,7 @@ namespace CLBL
     {
         public async Task<List<ZipCode>> getZipCodes()
         {
+            //Laver object af datahandler og kalder metode der skal anvendes for at modtage zipcodes
             ZipCodeDataHandler zipCodeDH = new ZipCodeDataHandler();
             return await zipCodeDH.getZipCodes();
         }

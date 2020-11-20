@@ -12,7 +12,7 @@ namespace CLDB
 {
     public class AddressDataHandler
     {
-        //Deklerere properties der skal anvendes. En connectionstring, en forbindelse der skal bruge connectionstring, samt en liste over returobjeker
+        //Deklerere properties der skal anvendes. En connectionstring, en forbindelse der skal bruge connectionstring
         private string connectionString;
         private SqlConnection conn;
         public AddressDataHandler()
@@ -23,7 +23,7 @@ namespace CLDB
         }
         public async Task<int> CreateAddress(Address inAddress)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("CreateAddress", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query  
@@ -33,8 +33,9 @@ namespace CLDB
             {
                 //åbner forbindelse til databasen
                 await conn.OpenAsync();
+                //modtager id på ny adresse
                 int newAddressId = (int)await cmd.ExecuteScalarAsync();
-                //Eksekvere SQL op imod databasen
+                //Eksekvere SQL op imod databasen, og hvis der er tale om et nyt id returneres det nye id
                 if (newAddressId > 0)
                 {
                     //Lukker forbindelsen og returner at sql er eksekveret successfuldt
@@ -56,13 +57,13 @@ namespace CLDB
         }
         public async Task<Address> getAddressFromId(int id)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetAddressFromId", conn);
             try
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", id);
-                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                //Åbner forbindelse og laver modelobjekt der returneres tilbage hvis process er successfuld
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
@@ -80,14 +81,14 @@ namespace CLDB
         }
         public async Task<Address> getAddressFromZipCodeAndStreet(int zipCode, string street)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetAddressFromZipCodeAndStreet", conn);
             try
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Zipcode", zipCode);
                 cmd.Parameters.AddWithValue("@Street", street);
-                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                //Åbner forbindelse og laver modelobjekt der returneres tilbage hvis process er successfuld
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
@@ -105,7 +106,7 @@ namespace CLDB
         }
         public async Task<bool> updateAddress(Address inAddress)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("UpdateAddress", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query
@@ -135,7 +136,6 @@ namespace CLDB
                 //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
                 return false;
             }
-            return false;
         }
     }
 }

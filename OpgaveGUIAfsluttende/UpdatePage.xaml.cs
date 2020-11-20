@@ -28,6 +28,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void UpdateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Laver en specifikt FormField og dimensionere det og putter det i viewgrid
             UpdateEmployeeFormField updateForm = new UpdateEmployeeFormField();
             updateForm.Height = 530;
             updateForm.Width = 1000;
@@ -36,6 +37,7 @@ namespace OpgaveGUIAfsluttende
         }
         private void hideBtns()
         {
+            //Når man har loadet form ind i grid skal knapper gøres usyndlig
             UpdateEmployeeBtn.Visibility = Visibility.Hidden;
         }
     }

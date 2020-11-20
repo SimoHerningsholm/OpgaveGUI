@@ -25,7 +25,7 @@ namespace CLDB
         }
         public async Task<List<Department>> GetDepartments()
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får query
             SqlCommand cmd = new SqlCommand("SELECT * FROM ViewAllDepartments", conn);
             try
             {
@@ -51,7 +51,7 @@ namespace CLDB
         }
         public async Task<List<Department>> GetDepartmentsFromCompanyId(int CompanyId)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetDepartmentsFromCompany", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@companyId", CompanyId);
@@ -79,13 +79,13 @@ namespace CLDB
         }
         public async Task<Department> GetDepartment(int departmentId)
         {
-            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("GetDepartmentFromId", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Id", departmentId);
             try
             {
-                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                //Åbner forbindelse og laver modelobjekt der returneres tilbage hvis process er successfuld
                 await conn.OpenAsync();
                 SqlDataReader reader = await cmd.ExecuteReaderAsync();
                 await reader.ReadAsync();
@@ -105,7 +105,7 @@ namespace CLDB
         }
         public async Task<bool> CreateDepartment(Department inDep, Employee inBoss)
         {
-            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            //Laver en sqlcommand der modtager forbindelsen og som får storedprocedure
             SqlCommand cmd = new SqlCommand("CreateDepartment", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             //værdier associeres med parametre for den ovenstående query  
@@ -116,6 +116,7 @@ namespace CLDB
             {
                 //åbner forbindelse til databasen
                 await conn.OpenAsync();
+                //modtager id på ny department 
                 int newDepartmentId = (int)await cmd.ExecuteScalarAsync();
                 //Eksekvere SQL op imod databasen
                 if (newDepartmentId > 1)
