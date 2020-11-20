@@ -44,6 +44,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             {
                 await empRep.DeleteEmployee(EmployeeId);
                 statusLabel.Content = "Success";
+                loadEmployees();
             }
             catch
             {

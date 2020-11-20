@@ -19,7 +19,7 @@ namespace CLDB
         public DepartmentDataHandler()
         {
             //Instanciere properties der skal anvendes
-            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Simon\\Source\\Repos\\OpgaveGUIAfsluttende\\OpgaveGUIAfsluttende\\AfsluttendeDB.mdf;Integrated Security=True";
             conn = new SqlConnection(connectionString);
             departmentList = new List<Department>();
         }
@@ -80,8 +80,9 @@ namespace CLDB
         public async Task<Department> GetDepartment(int departmentId)
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
-            SqlCommand cmd = new SqlCommand("GetDepartmentView", conn);
-            cmd.Parameters.AddWithValue("@departmentId", departmentId);
+            SqlCommand cmd = new SqlCommand("GetDepartmentFromId", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Id", departmentId);
             try
             {
                 //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.

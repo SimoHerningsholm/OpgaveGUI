@@ -18,7 +18,7 @@ namespace CLDB
         public AddressDataHandler()
         {
             //Instanciere properties der skal anvendes
-            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Simon\\Source\\Repos\\OpgaveGUIAfsluttende\\OpgaveGUIAfsluttende\\AfsluttendeDB.mdf;Integrated Security=True";
             conn = new SqlConnection(connectionString);
         }
         public async Task<int> CreateAddress(Address inAddress)
@@ -78,6 +78,64 @@ namespace CLDB
             }
             //Returnere modellisten uanset hvordan læsning af data er gået
         }
-
+        public async Task<Address> getAddressFromZipCodeAndStreet(int zipCode, string street)
+        {
+            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            SqlCommand cmd = new SqlCommand("GetAddressFromZipCodeAndStreet", conn);
+            try
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Zipcode", zipCode);
+                cmd.Parameters.AddWithValue("@Street", street);
+                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                await conn.OpenAsync();
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                await reader.ReadAsync();
+                Address newAddr = new Address();
+                newAddr.Street = (string)reader["Street"];
+                newAddr.ZipCode = (int)reader["Zipcode"];
+                conn.Close();
+                return newAddr;
+            }
+            catch (Exception e) //Er der gået noget galt laves en exception
+            {
+                return null;
+            }
+            //Returnere modellisten uanset hvordan læsning af data er gået
+        }
+        public async Task<bool> updateAddress(Address inAddress)
+        {
+            //Sætter returvariabel der fortæller om metode er eksekveret uden problemer, til som udgangspunkt at være true
+            SqlCommand cmd = new SqlCommand("UpdateAddress", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //værdier associeres med parametre for den ovenstående query
+            cmd.Parameters.AddWithValue("@Id", inAddress.Id);
+            cmd.Parameters.AddWithValue("@Street", inAddress.Street);
+            cmd.Parameters.AddWithValue("@Zipcode", inAddress.ZipCode);
+            try
+            {
+                //åbner forbindelse til databasen
+                await conn.OpenAsync();
+                //Eksekvere SQL op imod databasen
+                if (await cmd.ExecuteNonQueryAsync() == 1)
+                {
+                    //Lukker forbindelsen og returner at sql er eksekveret successfuldt
+                    conn.Close();
+                    return true;
+                }
+                else
+                {
+                    //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                    conn.Close();
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
+                return false;
+            }
+            return false;
+        }
     }
 }

@@ -43,7 +43,6 @@ namespace OpgaveGUIAfsluttende.UserControls
             get { return ((ComboBox)Content).SelectedIndex; }
             set { ((ComboBox)Content).SelectedIndex = value; }
         }
-
         protected void ComboFieldSelectionChanged(object sender, EventArgs e)
         {
             //Eksekveres denne metode eksekveres eventet såfremt eventet er sat

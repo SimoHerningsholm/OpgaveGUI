@@ -18,7 +18,7 @@ namespace CLDB
         public EmployeeDataHandler()
         {
             //Generere en liste af employee objekter der kan simulere database data i frontend
-            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Simon\\Source\\Repos\\OpgaveGUIAfsluttende\\OpgaveGUIAfsluttende\\AfsluttendeDB.mdf;Integrated Security=True";
             conn = new SqlConnection(connectionString);
             employeeList = new List<Employee>();
         }

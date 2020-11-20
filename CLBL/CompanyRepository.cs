@@ -23,6 +23,10 @@ namespace CLBL
         {
             return await companyDH.GetCompany(companyId);
         }
+        public async Task<Company> getCompanyFromDepartmentId(int departmentId)
+        {
+            return await companyDH.GetCompanyFromDepartmentId(departmentId);
+        }
         public async Task<bool> CreateCompany(Company inComp)
         {
             return await companyDH.CreateCompany(inComp);

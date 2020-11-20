@@ -22,6 +22,8 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class UpdateEmployeeFormField : UserControl
     {
+        private string chosenStreet;
+        private int chosenAddressId;
         private int employeeId;
         private int chosenZipCode;
         private int chosenCompanyId;
@@ -53,13 +55,11 @@ namespace OpgaveGUIAfsluttende.UserControls
             jobtitles = new List<JobTitle>();
             zipCodes = new List<ZipCode>();
             empList = new List<Employee>();
-            setEmployeeFieldLabels();
+            GetEmployeeFieldLabels();
             loadEmployees();
-            chosenCompanyId = 0;
-            setEmployeeFieldLabels();
-            setZipCodeItems();
-            setComboJobTitleItems();
-            setComboCompanyItems();
+            GetZipCodeItems();
+            GetComboJobTitleItems();
+            GetComboCompanyItems();
         }
         private async void UpdateEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -70,14 +70,16 @@ namespace OpgaveGUIAfsluttende.UserControls
                 updateEmp.Id = employeeId;
                 updateEmp.FirstName = EmployeeFirstName.TextBoxField.Text;
                 updateEmp.LastName = EmployeeLastName.TextBoxField.Text;
-                updateEmp.Address = int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
-                updateEmp.BirthDay = Convert.ToDateTime(EmployeeBirthDay.DatePickField.Text);
+                updateEmp.Address = chosenAddressId;
+                updateEmp.BirthDay = Convert.ToDateTime(EmployeeBirthDay.DatePickField.SelectedDate);
                 updateEmp.Email = EmployeeEmail.TextBoxField.Text;
                 updateEmp.Phone = int.Parse(EmployeePhone.TextBoxField.Text);
                 updateEmp.Department = chosendepartment;
                 updateEmp.JobTitle = chosenJobTitle;
+                updateAddress();
                 await empRep.UpdateEmployee(updateEmp);
                 statusLabel.Content = "Success";
+                loadEmployees();
             }
             catch(Exception errorMsg)
             {
@@ -86,53 +88,100 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void loadEmployees()
         {
+            EmployeeViewerGrid.ItemsSource = null;
+            empList.Clear();
             empList = await empRep.GetEmployees();
             EmployeeViewerGrid.ItemsSource = empList;
         }
         private async void EmployeeViewerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            employeeId = int.Parse((EmployeeViewerGrid.SelectedCells[0].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
-            EmployeeFirstName.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[1].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
-            EmployeeLastName.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[2].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
-            SetStreetAndZipCodeFromAdress(int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
-            EmployeeBirthDay.DatePickField.Text = (EmployeeViewerGrid.SelectedCells[5].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
-            EmployeeEmail.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[5].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
-            EmployeePhone.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[6].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
-            chosendepartment = int.Parse((EmployeeViewerGrid.SelectedCells[7].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
-            chosenJobTitle = int.Parse((EmployeeViewerGrid.SelectedCells[8].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
-            EmployeeDepartment.ComboBoxField.SelectedIndex = 2;
-        /*    for (int i = 0; i < departments.Count; i++)
+            //Når der vælges en employee i viewgrid, loades employee ind i de forskellige form felter. Nogengange skal et felt parses ind i en metode der 
+            //henter brugervenlig værdi som.feks når brugeren skal kunne se zipcode ud fra adresse id. Man kunne også lave view hvor der er joined på adresse
+            //Men lige pt ligger views i forlængelse af modeller der ligger i direkte forlængelse af database. Et view hvor der er joined på andre tabeller
+            //Laves i viewemployeeformfield hvis jeg får tid og husker det.
+            if(EmployeeViewerGrid.ItemsSource != null)
             {
-                if((string)EmployeeDepartment.ComboBoxField.Items[i] == "Manager")
+                try
                 {
-                    EmployeeDepartment.ComboBoxField.SelectedIndex = i + 1;
+                    employeeId = int.Parse((EmployeeViewerGrid.SelectedCells[0].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
+                    EmployeeFirstName.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[1].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
+                    EmployeeLastName.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[2].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
+                    GetAddressValues(int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
+                    EmployeeBirthDay.DatePickField.SelectedDate = DateTime.Parse((EmployeeViewerGrid.SelectedCells[4].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
+                    EmployeeEmail.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[5].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
+                    EmployeePhone.TextBoxField.Text = (EmployeeViewerGrid.SelectedCells[6].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text;
+                    GetDepartmentNameFromid(int.Parse((EmployeeViewerGrid.SelectedCells[7].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
+                    GetJobTitleFromId(int.Parse((EmployeeViewerGrid.SelectedCells[8].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
+                    GetCompanyFromDepartment(int.Parse((EmployeeViewerGrid.SelectedCells[7].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text));
                 }
-            }*/
+                catch
+                {
+                    statusLabel.Content = "missclick";
+                }
+            }
         }
-
-        private async void SetStreetAndZipCodeFromAdress(int addressId)
+        public async void updateAddress()
         {
-            Address newAddr = await addRep.getAddressFromId(addressId);
-            EmployeeStreet.TextBoxField.Text = newAddr.Street;
-            chosenZipCode = newAddr.ZipCode;
+            Address updatedAddr = new Address();
+            updatedAddr.Id = int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
+            updatedAddr.ZipCode = chosenZipCode;
+            updatedAddr.Street = EmployeeStreet.TextBoxField.Text;
+            await addRep.updateAddress(updatedAddr);
         }
-        private async void setEmployeeFieldLabels()
+        private async void GetAddressValues(int addressId)
         {
-            //Content på labels i de forskellige usercontrols sættes med de værdier der gør sig gældende for en createemployee form
-            EmployeeFirstName.TextFieldLabel.Content = "Firstname:";
-            EmployeeLastName.TextFieldLabel.Content = "Lastname:";
-            EmployeeStreet.TextFieldLabel.Content = "Street:";
-            EmployeeZipCode.ComboFieldLabel.Content = "Zipcode";
-            EmployeeBirthDay.DateFieldLabel.Content = "Birthday:";
-            EmployeeEmail.TextFieldLabel.Content = "Email";
-            EmployeePhone.TextFieldLabel.Content = "Phone";
-            EmployeeDepartment.ComboFieldLabel.Content = "Jobtitle";
-            EmployeeCompany.ComboFieldLabel.Content = "Company:";
-            EmployeeDepartment.ComboFieldLabel.Content = "Department:";
+            chosenAddressId = addressId;
+            Address getAddr = await addRep.getAddressFromId(addressId);
+            chosenZipCode = getAddr.ZipCode;
+            chosenStreet = getAddr.Street;
+            EmployeeStreet.TextBoxField.Text = chosenStreet;
+            for (int i = 0; i < zipCodes.Count; i++)
+            {
+                if ((int)EmployeeZipCode.ComboBoxField.Items[i] == getAddr.ZipCode)
+                {
+                    EmployeeZipCode.ComboBoxField.SelectedIndex = i;
+                    break;
+                }
+            }
         }
-
+        public async void GetCompanyFromDepartment(int departmentId)
+        {
+            Company comp = await compRep.getCompanyFromDepartmentId(departmentId);
+            for (int i = 0; i < companies.Count; i++)
+            {
+                if ((string)EmployeeCompany.ComboBoxField.Items[i] == comp.Name)
+                {
+                    EmployeeCompany.ComboBoxField.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+        public async void GetDepartmentNameFromid(int departmentId)
+        {
+            Department dep = await depRep.GetDepartment(departmentId);
+            for (int i = 0; i < departments.Count; i++)
+            {
+                if ((string)EmployeeDepartment.ComboBoxField.Items[i] == dep.Name)
+                {
+                    EmployeeDepartment.ComboBoxField.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+        public async void GetJobTitleFromId(int jobTitleId)
+        {
+            JobTitle job = await jobRep.getJobTitle(jobTitleId);
+            for (int i = 0; i < jobtitles.Count; i++)
+            {
+                if ((string)EmployeeJobTitle.ComboBoxField.Items[i] == job.Name)
+                {
+                    EmployeeJobTitle.ComboBoxField.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
         //Company combobokse skal liste alle de mulige companies man kan vælge imellem
-        private async void setComboCompanyItems()
+        private async void GetComboCompanyItems()
         {
             companies = await compRep.getCompanies();
             for (int i = 0; i < companies.Count; i++)
@@ -141,7 +190,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             }
         }
         //zipcode comboboks skal liste alle de mulige postnumre. Ved at placere i comboboks kan brugeren ikke vælge et der ikke eksistere
-        private async void setZipCodeItems()
+        private async void GetZipCodeItems()
         {
             zipCodes = await zipRep.getZipCodes();
             for (int i = 0; i < zipCodes.Count; i++)
@@ -150,7 +199,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             }
         }
         //comboboks med jobtitler skal have alle de mulige jobtitler
-        private async void setComboJobTitleItems()
+        private async void GetComboJobTitleItems()
         {
             jobtitles = await jobRep.getJobTitles();
             for (int i = 0; i < jobtitles.Count; i++)
@@ -159,7 +208,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             }
         }
         //comboboks med afdelinger skal fyldes med afdelinger der ligger i forlængelse af den company der er valgt
-        private async void setComboDepartmentItems(int chosenCompany)
+        private async void GetComboDepartmentItems(int chosenCompany)
         {
             departments = await depRep.GetDepartmentsFromCompany(chosenCompany);
             for (int i = 0; i < departments.Count; i++)
@@ -167,33 +216,41 @@ namespace OpgaveGUIAfsluttende.UserControls
                 EmployeeDepartment.ComboBoxField.Items.Add(departments[i].Name);
             }
         }
-        //Alle combofieldchanged
         //Når man har valgt et firma sættes id på det firma man har valgt og det bliver muligt at vælge afdelinger relateret til firmaet
         private async void EmployeeCompany_comboFieldChanged(object sender, EventArgs e)
         {
             //Er der valgt et firma sættes employeedepartment comboboks til at være synlig så man kan vælge afdeling
             chosenCompanyId = companies.Find(c => c.Id == companies[EmployeeCompany.ComboBoxField.SelectedIndex].Id).Id;
-            setComboDepartmentItems(chosenCompanyId);
-            EmployeeDepartment.Visibility = Visibility.Visible;
-            statusLabel.Content = chosenCompanyId;
+            GetComboDepartmentItems(chosenCompanyId);
         }
         //Når der vælges en ny jobtitel sættes id på den pågældende titel med henblik på at kunne opdatere bruger med det id
         private void EmployeeJobTitle_comboFieldChanged(object sender, EventArgs e)
         {
-            chosenJobTitle = jobtitles.Find(c => c.Id == jobtitles[EmployeeJobTitle.ComboBoxField.SelectedIndex].Id).Id;
-            statusLabel.Content = chosenJobTitle;
+                chosenJobTitle = jobtitles.Find(c => c.Id == jobtitles[EmployeeJobTitle.ComboBoxField.SelectedIndex].Id).Id;
         }
         //Når man har valgt en afdeling sættes id på det department med henblik på at brugeren modtager denne department
         private void EmployeeDepartment_comboFieldChanged(object sender, EventArgs e)
         {
             chosendepartment = departments.Find(c => c.Id == departments[EmployeeDepartment.ComboBoxField.SelectedIndex].Id).Id;
-            statusLabel.Content = chosendepartment;
         }
         //Når man har valgt postnumre sættes postnummer property som kan sendes videre til adresse for brugeren
         private void EmployeeZipCode_comboFieldChanged(object sender, EventArgs e)
         {
             chosenZipCode = zipCodes.Find(c => c.Zipcode == zipCodes[EmployeeZipCode.ComboBoxField.SelectedIndex].Zipcode).Zipcode;
-            statusLabel.Content = chosenZipCode;
+        }
+        //Content på labels i de forskellige usercontrols sættes med de værdier der gør sig gældende for en createemployee form
+        private async void GetEmployeeFieldLabels()
+        {
+            EmployeeFirstName.TextFieldLabel.Content = "Firstname:";
+            EmployeeLastName.TextFieldLabel.Content = "Lastname:";
+            EmployeeStreet.TextFieldLabel.Content = "Street:";
+            EmployeeZipCode.ComboFieldLabel.Content = "Zipcode";
+            EmployeeBirthDay.DateFieldLabel.Content = "Birthday:";
+            EmployeeEmail.TextFieldLabel.Content = "Email";
+            EmployeePhone.TextFieldLabel.Content = "Phone";
+            EmployeeJobTitle.ComboFieldLabel.Content = "Jobtitle";
+            EmployeeCompany.ComboFieldLabel.Content = "Company:";
+            EmployeeDepartment.ComboFieldLabel.Content = "Department:";
         }
     }
 }

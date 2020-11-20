@@ -12,10 +12,18 @@ namespace CLBL
 {
     public class JobTitleRepository
     {
+        JobTitleDataHandler jobTitleDH;
+        public JobTitleRepository()
+        {
+            jobTitleDH = new JobTitleDataHandler();
+        }
         public async Task<List<JobTitle>> getJobTitles()
         {
-            JobTitleDataHandler jobTitleDH = new JobTitleDataHandler();
             return await jobTitleDH.getJobTitles();
+        }
+        public async Task<JobTitle> getJobTitle(int jobTitleId)
+        {
+            return await jobTitleDH.GetJobTitle(jobTitleId);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace CLDB
         public CompanyDataHandler()
         {
             //Instanciere properties der skal anvendes
-            connectionString = "Data Source=D0004;Initial Catalog=OpgaveDBAfsluttendeDB;User ID=sa;Password=Test142536";
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Simon\\Source\\Repos\\OpgaveGUIAfsluttende\\OpgaveGUIAfsluttende\\AfsluttendeDB.mdf;Integrated Security=True";
             conn = new SqlConnection(connectionString);
             companyList = new List<Company>();
         }
@@ -54,6 +54,32 @@ namespace CLDB
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
             SqlCommand cmd = new SqlCommand("GetCompanyView", conn);
             cmd.Parameters.AddWithValue("@companyId", companyId);
+            try
+            {
+                //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
+                await conn.OpenAsync();
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                await reader.ReadAsync();
+                Company comp = new Company();
+                comp.Id = (int)reader["Id"];
+                comp.Name = (string)reader["Name"];
+                comp.Address = (int)reader["Address"];
+                conn.Close();
+                return comp;
+            }
+            catch (Exception e) //Er der gået noget galt laves en exception
+            {
+                companyList = null;
+            }
+            //Returnere modellisten uanset hvordan læsning af data er gået
+            return null;
+        }
+        public async Task<Company> GetCompanyFromDepartmentId(int departmentId)
+        {
+            //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
+            SqlCommand cmd = new SqlCommand("GetCompanyFromDepartmentId", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Id", departmentId);
             try
             {
                 //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.
