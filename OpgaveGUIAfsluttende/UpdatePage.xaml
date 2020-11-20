@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:OpgaveGUIAfsluttende"
       xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="530" d:DesignWidth="800"
+      d:DesignHeight="530" d:DesignWidth="1000"
       Title="UpdatePage">
     <Grid>
         <!-- denne side er indtil videre bare en side med et createemployee usercontrol der laves i codebehind. Yderligere funktionalitet forbundet med en create

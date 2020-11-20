@@ -26,7 +26,7 @@ namespace CLDB
         public async Task<List<Department>> GetDepartments()
         {
             //Laver en sqlcommand der modtager forbindelsen og som får query der vælger alt fra Opgave4View
-            SqlCommand cmd = new SqlCommand("AllDepartmentsView", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM ViewAllDepartments", conn);
             try
             {
                 //Åbner forbindelse og sætter modelobjekter ind i listen mens der er data til modeller at læse. Til sidst lukkes der for forbindelsen.

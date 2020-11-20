@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:OpgaveGUIAfsluttende.UserControls"
              mc:Ignorable="d" 
              xmlns:custom="clr-namespace:OpgaveGUIAfsluttende"
-             d:DesignHeight="350" d:DesignWidth="650">
+             d:DesignHeight="350" d:DesignWidth="1000">
     <Grid>
         <!-- Opstiller rowdefinitions for det overlæggende grid-->
         <Grid.RowDefinitions>
@@ -19,15 +19,15 @@
         <Grid Grid.Row="1">
             <!-- opstiller kolonner for det indre grid-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="480" />
-                <ColumnDefinition Width="170" />
+                <ColumnDefinition Width="700" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
             <!-- lægger datagrid i kolonne 0-->
-            <DataGrid Grid.Column="0" x:Name="EmployeeViewerGrid" Width="480" />
+            <DataGrid Grid.Column="0" x:Name="EmployeeViewerGrid" Width="700" />
             <!-- Laver et stackpanel som indeholder de resterende værktøjer i anden kolonne-->
             <StackPanel Grid.Column="1">
                 <!-- laver comboboks med queryoptions som modtager styles fra combostyles i app resources.-->
-                <ComboBox Style="{StaticResource comboStyles}" x:Name="QueryOptionsCombo"  Width="130" SelectionChanged="QueryOptionsCombo_SelectionChanged">
+                <ComboBox Style="{StaticResource comboStyles}" x:Name="QueryOptionsCombo"  Width="200" SelectionChanged="QueryOptionsCombo_SelectionChanged">
                     <!-- Som en midlertidig løsning hardcodes comboboks valg, men hvis tiden tillader det skal det laves dynamisk på sigt-->
                     <ComboBoxItem Content="Employee Id"></ComboBoxItem>
                     <ComboBoxItem Content="Company Id"></ComboBoxItem>
@@ -35,9 +35,9 @@
                     <ComboBoxItem Content="Boss Id"></ComboBoxItem>
                 </ComboBox>
                 <!-- Laver en liste der kan indeholde de identificers der skal laves queries ud fra-->
-                <ListBox x:Name="QueryOptionResultList" Height="255" Width="130"/>
+                <ListBox x:Name="QueryOptionResultList" Height="255" Width="200"/>
                 <!-- laver en queryemployee knap som eksekvere query og loader queried data ind i datagrid-->
-                <custom:QueryEmployee Content="Query employee"  Width="130" Click="QueryEmployee_Click"/>
+                <custom:QueryEmployee Content="Query employee"  Width="200" Click="QueryEmployee_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

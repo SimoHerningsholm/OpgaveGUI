@@ -28,6 +28,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         private EmployeeRepository empRep;
         private List<Employee> potentialBosses;
         private List<Company> PotentialCompanies;
+        private List<Department> Departments;
         private Employee chosenBoss;
         public CreateDepartmentFormField()
         {
@@ -38,10 +39,19 @@ namespace OpgaveGUIAfsluttende.UserControls
             chosenBoss = new Employee();
             potentialBosses = new List<Employee>();
             PotentialCompanies = new List<Company>();
+            Departments = new List<Department>();
             ChosenCompanyId = 0;
             SetDepartmentFormLabels();
             loadCompanyCombo();
             LoadBossCombo();
+            loadDepartments();
+        }
+        private async void loadDepartments()
+        {
+            departmentsGrid.ItemsSource = null;
+            Departments.Clear();
+            Departments = await depRep.GetDepartments();
+            departmentsGrid.ItemsSource = Departments;
         }
         private async void CreateDepartmentBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -57,6 +67,7 @@ namespace OpgaveGUIAfsluttende.UserControls
                 //Den nye department sendes til oprettelse med employee der er sat til at være chef for afdelingen
                 await depRep.CreateDepartment(newDep, chosenBoss);
                 statusLabel.Content = "Department created";
+                loadDepartments();
             }
             catch
             {

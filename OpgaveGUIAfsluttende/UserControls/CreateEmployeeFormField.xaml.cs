@@ -145,6 +145,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         //Når man har valgt et firma sættes id på det firma man har valgt og det bliver muligt at vælge afdelinger relateret til firmaet
         private async void Company_ComboFieldChanged(object sender, EventArgs e)
         {
+            EmployeeDepartment.ComboBoxField.SelectedIndex = -1;
             //Er der valgt et firma sættes employeedepartment comboboks til at være synlig så man kan vælge afdeling
             chosenCompanyId = companies.Find(c => c.Id == companies[EmployeeCompany.ComboBoxField.SelectedIndex].Id).Id;
             setComboDepartmentItems(chosenCompanyId);

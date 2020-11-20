@@ -30,7 +30,7 @@ namespace OpgaveGUIAfsluttende
         {
             DeleteEmployeeFormField deleteForm = new DeleteEmployeeFormField();
             deleteForm.Height = 530;
-            deleteForm.Width = 650;
+            deleteForm.Width = 1000;
             viewGrid.Children.Add(deleteForm);
             hideBtns();
         }

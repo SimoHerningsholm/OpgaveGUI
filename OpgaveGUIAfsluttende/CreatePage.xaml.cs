@@ -37,7 +37,7 @@ namespace OpgaveGUIAfsluttende
         {
             CreateDepartmentFormField createForm = new CreateDepartmentFormField();
             createForm.Height = 480;
-            createForm.Width = 300;
+            createForm.Width = 1000;
             viewGrid.Children.Add(createForm);
             hideBtns();
         }

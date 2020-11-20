@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.Data;
 using CLBL;
 using CLModels;
 
@@ -20,16 +21,14 @@ namespace OpgaveGUIAfsluttende.UserControls
 {
     public partial class ViewEmployeeFormField : UserControl
     {
-        private EmployeeRepository empRep;
-        private List<Employee> empList;
+        private JoinedViewRepository joinRep;
         public ViewEmployeeFormField()
         {
             InitializeComponent();
             //Employee Repository instancieres og emloyees loades i grid og comboboks fyldes med gyldige værdier (når der kommer SQL på)
-            this.empRep = new EmployeeRepository();
-            empList = new List<Employee>();
-            loadEmployees();
+            joinRep = new JoinedViewRepository();
             loadComboOptions();
+            loadView();
         }
 
         private async void QueryEmployee_Click(object sender, RoutedEventArgs e)
@@ -37,11 +36,10 @@ namespace OpgaveGUIAfsluttende.UserControls
             //Klikkes der på queryemployee kaldes queryemployee metoden
             queryEmployee();
         }
-        public async void loadEmployees()
+        public async void loadView()
         {
-        //Sætter gridview til at indeholde liste over employees der hentes fra businesslogic laget.
-            empList = await empRep.GetEmployees();
-            EmployeeViewerGrid.ItemsSource = empList;
+            //Sætter gridview til at indeholde liste over employees der hentes fra businesslogic laget.
+            EmployeeViewerGrid.ItemsSource = await joinRep.ViewEmployeesWithJoinedData();
           //  EmployeeViewerGrid.ItemsSource = empList;
         }
         private async void loadComboOptions()
@@ -61,11 +59,11 @@ namespace OpgaveGUIAfsluttende.UserControls
             QueryOptionResultList.Items.Clear();
             //indtil videre kommer der bare en liste over employee id'er der kan queries på.
             //Når der kommer SQL ind over skal der queries data der ligger i forlængelse af valget
-            List<Employee> employees = await empRep.GetEmployees();
+          /*  List<Employee> employees = await empRep.GetEmployees();
             for (int i = 0; i < employees.Count; i++)
             {
                 QueryOptionResultList.Items.Add(employees[i].Id);
-            }
+            }*/
         }
         private async void queryEmployee()
         {
@@ -75,7 +73,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             if (QueryOptionResultList.SelectedValue != null)
             {
                 //Finder alle employees hvor der er et match på valgt id og laver det til en liste som queriedEmployees sættes til at være
-                queriedEmployees = empList.Where(employee => employee.Id == (int)QueryOptionResultList.SelectedValue).ToList();
+              //  queriedEmployees = empList.Where(employee => employee.Id == (int)QueryOptionResultList.SelectedValue).ToList();
             }
             //Sætter itemsource på datagrid til at være listen over employees der opfylder kriterier
             EmployeeViewerGrid.ItemsSource = queriedEmployees;

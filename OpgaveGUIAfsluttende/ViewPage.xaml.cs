@@ -29,7 +29,7 @@ namespace OpgaveGUIAfsluttende
             viewfield.HorizontalAlignment = HorizontalAlignment.Center;
             viewfield.VerticalAlignment = VerticalAlignment.Center;
             viewfield.Height = 400;
-            viewfield.Width = 650;
+            viewfield.Width = 1000;
             viewgrid.Children.Add(viewfield);
 
         }

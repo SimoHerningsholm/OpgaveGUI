@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:OpgaveGUIAfsluttende"
       xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls" 
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="1000"
       Title="ViewPage">
     <Grid x:Name="viewgrid">
         <!-- indtil videre er det bare en side der loader usercontrol gennem koden. På sigt kan det eventuelt blive en side hvor man kan loade forskellige viewforms ind i.-->

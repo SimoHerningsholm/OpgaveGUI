@@ -36,7 +36,10 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         public async void loadEmployees()
         {
-            EmployeeViewGrid.ItemsSource = await empRep.GetEmployees();
+            EmployeeViewGrid.ItemsSource = null;
+            empList.Clear();
+            empList = await empRep.GetEmployees();
+            EmployeeViewGrid.ItemsSource = empList;
         }
         private async void DeleteEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -54,10 +57,13 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private void EmployeeViewerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EmployeeId = int.Parse((EmployeeViewGrid.SelectedCells[0].Column.GetCellContent(EmployeeViewGrid.SelectedItem) as TextBlock).Text);
-            EmployeeName = (EmployeeViewGrid.SelectedCells[1].Column.GetCellContent(EmployeeViewGrid.SelectedItem) as TextBlock).Text;
-            chosenEmployeeId.Content = EmployeeId;
-            chosenEmployeeName.Content = EmployeeName;
+            if(EmployeeViewGrid.ItemsSource != null)
+            {
+                EmployeeId = int.Parse((EmployeeViewGrid.SelectedCells[0].Column.GetCellContent(EmployeeViewGrid.SelectedItem) as TextBlock).Text);
+                EmployeeName = (EmployeeViewGrid.SelectedCells[1].Column.GetCellContent(EmployeeViewGrid.SelectedItem) as TextBlock).Text;
+                chosenEmployeeId.Content = EmployeeId;
+                chosenEmployeeName.Content = EmployeeName;
+            }
         }
     }
 }

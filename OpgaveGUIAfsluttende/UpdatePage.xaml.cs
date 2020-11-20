@@ -30,7 +30,7 @@ namespace OpgaveGUIAfsluttende
         {
             UpdateEmployeeFormField updateForm = new UpdateEmployeeFormField();
             updateForm.Height = 530;
-            updateForm.Width = 800;
+            updateForm.Width = 1000;
             viewGrid.Children.Add(updateForm);
             hideBtns();
         }

@@ -7,12 +7,12 @@
              xmlns:UserControls="clr-namespace:OpgaveGUIAfsluttende.UserControls"
              xmlns:custom="clr-namespace:OpgaveGUIAfsluttende"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="1000">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="657*"/>
-            <ColumnDefinition Width="143*"/>
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="700"/>
         </Grid.ColumnDefinitions>
         <!-- Opstiller rowdefinitions for det overlæggende grid-->
         <Grid.RowDefinitions>
@@ -25,32 +25,32 @@
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <!-- opstiller kolonner for det indre grid-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="275" />
-                <ColumnDefinition Width="525" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="700" />
             </Grid.ColumnDefinitions>
             <!-- lægger datagrid i kolonne 0-->
-            <DataGrid Grid.Column="1" x:Name="EmployeeViewerGrid" Width="500" SelectionChanged="EmployeeViewerGrid_SelectionChanged" />
+            <DataGrid Grid.Column="1" x:Name="EmployeeViewerGrid" Width="700" SelectionChanged="EmployeeViewerGrid_SelectionChanged" />
             <!-- Laver et stackpanel som indeholder de resterende værktøjer i anden kolonne-->
             <!-- Formens elementer lægges i et stackpanel-->
             <StackPanel Margin="0 20 0 0">
                 <!-- Laver overskrift som stiles af textblockstyle fra app resources-->
                 <!-- Anvender en usercontrol til hvert form felt. Der er usercontrol til textbox, til datetimepicker og til comboboks-->
                 <!-- Anvender en usercontrol til hvert form felt. Der er usercontrol til textbox, til datetimepicker og til comboboks-->
-                <UserControls:TextField x:Name="EmployeeFirstName" Height="35" Width="275"/>
-                <UserControls:TextField x:Name="EmployeeLastName" Height="35" Width="275"/>
-                <UserControls:TextField x:Name="EmployeeStreet" Height="35" Width="275"/>
-                <UserControls:ComboField x:Name="EmployeeZipCode" Height="35" Width="275" comboFieldChanged="EmployeeZipCode_comboFieldChanged"/>
-                <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="275"/>
-                <UserControls:TextField x:Name="EmployeeEmail" Height="35" Width="275"/>
-                <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="275"/>
-                <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="275" comboFieldChanged="EmployeeJobTitle_comboFieldChanged"/>
-                <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="275" comboFieldChanged="EmployeeCompany_comboFieldChanged"/>
-                <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="275" comboFieldChanged="EmployeeDepartment_comboFieldChanged"/>
+                <UserControls:TextField x:Name="EmployeeFirstName" Height="35" Width="300"/>
+                <UserControls:TextField x:Name="EmployeeLastName" Height="35" Width="300"/>
+                <UserControls:TextField x:Name="EmployeeStreet" Height="35" Width="300"/>
+                <UserControls:ComboField x:Name="EmployeeZipCode" Height="35" Width="300" comboFieldChanged="EmployeeZipCode_comboFieldChanged"/>
+                <UserControls:DateField x:Name="EmployeeBirthDay" Height="35" Width="300"/>
+                <UserControls:TextField x:Name="EmployeeEmail" Height="35" Width="300"/>
+                <UserControls:TextField x:Name="EmployeePhone" Height="35" Width="300"/>
+                <UserControls:ComboField x:Name="EmployeeJobTitle" Height="35" Width="300" comboFieldChanged="EmployeeJobTitle_comboFieldChanged"/>
+                <UserControls:ComboField x:Name="EmployeeCompany"  Height="35" Width="300" comboFieldChanged="EmployeeCompany_comboFieldChanged"/>
+                <UserControls:ComboField x:Name="EmployeeDepartment" Height="35" Width="300" comboFieldChanged="EmployeeDepartment_comboFieldChanged"/>
                 <!-- Der laves en knap af typen createemployee som er en custom control.-->
                 <Button Style="{StaticResource buttonStyles}" x:Name="UpdateEmployeeBtn" Content="Update Employee" Width="160" Height="30" Click="UpdateEmployeeBtn_Click"/>
                 <!-- En label udskriver om der har været success med oprettelse eller ej-->
                 <Label x:Name="statusLabel"/>
-                <UserControls:ComboField x:Name="EmployeeErrors" Height="35" Width="275" Visibility="Hidden" />
+                <UserControls:ComboField x:Name="EmployeeErrors" Height="35" Width="300" Visibility="Hidden" />
             </StackPanel>
         </Grid>
     </Grid>
