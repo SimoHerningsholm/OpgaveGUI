@@ -29,5 +29,15 @@ namespace CLDB
             sda.Fill(dt);
             return dt.DefaultView;
         }
+        public async Task<DataView> ViewEmployeeWithJoinedData(int employeeId)
+        {
+            SqlCommand cmd = new SqlCommand("ViewEmployeeWithJoinedData", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Id", employeeId);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable("ViewEmployeeWithJoinedData");
+            sda.Fill(dt);
+            return dt.DefaultView;
+        }
     }
 }

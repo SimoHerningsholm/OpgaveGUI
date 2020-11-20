@@ -21,5 +21,9 @@ namespace CLBL
         {
             return await joinedViewDH.ViewEmployeesWithJoinedData();
         }
+        public async Task<DataView> ViewEmployeeWithJoinedData(int employeeId)
+        {
+            return await joinedViewDH.ViewEmployeeWithJoinedData(employeeId);
+        }
     }
 }
