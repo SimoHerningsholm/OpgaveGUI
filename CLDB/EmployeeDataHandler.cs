@@ -155,7 +155,7 @@ namespace CLDB
                     return false;
                 }
             }
-            catch
+            catch(Exception e)
             {
                 //Lukker forbindelsen og returner at sql ikke er eksekveret successfuldt
                 return false;

@@ -23,6 +23,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     public partial class CreateEmployeeFormField : UserControl
     {
         //Deklerere variabler og lister der skal anvends for at oprette en employee
+        private bool derpbool;
         private int chosenZipCode;
         private int chosenCompanyId;
         private int chosenJobTitle;
@@ -53,6 +54,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             departments = new List<Department>();
             jobtitles = new List<JobTitle>();
             zipCodes = new List<ZipCode>();
+            derpbool = false;
             chosenCompanyId = 0;
             //loader data ind der skal anvendes for at employeeformen er funktionel
             setEmployeeFieldLabels();
@@ -75,12 +77,15 @@ namespace OpgaveGUIAfsluttende.UserControls
                 newEmp.Department = chosendepartment;
                 newEmp.JobTitle = chosenJobTitle;
                 await empRep.CreateEmployee(newEmp);
+                setEmptyFields();
+                statusLabel.Content = "Success";
             }
             catch
             {
                 statusLabel.Content = "error";
             }
         }
+
         private async Task<int> getNewAddressId()
         {
             //opretter adresse på basis af zipcode og street og modtager id på ny adresse
@@ -94,6 +99,20 @@ namespace OpgaveGUIAfsluttende.UserControls
             {
                 return 1;
             }
+        }
+        private async void setEmptyFields()
+        {
+            //Content på labels i de forskellige usercontrols sættes med de værdier der gør sig gældende for en createemployee form
+            EmployeeFirstName.TextBoxField.Text = string.Empty;
+            EmployeeLastName.TextBoxField.Text = string.Empty;
+            EmployeeStreet.TextBoxField.Text = string.Empty;
+            EmployeeZipCode.ComboBoxField.SelectedIndex = 0;
+            EmployeeBirthDay.DatePickField.SelectedDate =  DateTime.Now;
+            EmployeeEmail.TextBoxField.Text = string.Empty;
+            EmployeePhone.TextBoxField.Text = string.Empty;
+            EmployeeDepartment.ComboBoxField.SelectedIndex = 0;
+            EmployeeCompany.ComboBoxField.SelectedIndex = 0;
+            EmployeeDepartment.Visibility = Visibility.Hidden;
         }
         private async void setEmployeeFieldLabels()
         {
@@ -140,17 +159,32 @@ namespace OpgaveGUIAfsluttende.UserControls
         //comboboks med afdelinger skal fyldes med afdelinger der ligger i forlængelse af den company der er valgt
         private async void setComboDepartmentItems(int chosenCompany)
         {
-            departments = await depRep.GetDepartmentsFromCompany(chosenCompany);
-            for (int i = 0; i < departments.Count; i++)
+            //hvis comboboks har flere items end 0 skal departmentliste clears og combobox skal cleares. derefter skal 
+            //liste og comboboks reloades med nye værdier. Hvis der ikke er over 0 er det første gang den skal fyldes.
+            if (EmployeeDepartment.ComboBoxField.Items.Count >= 1)
             {
-                EmployeeDepartment.ComboBoxField.Items.Add(departments[i].Name);
+                derpbool = true;
+                departments.Clear();
+                EmployeeDepartment.ComboBoxField.Items.Clear();
+                departments = await depRep.GetDepartmentsFromCompany(chosenCompany);
+                for (int i = 0; i < departments.Count; i++)
+                {
+                    EmployeeDepartment.ComboBoxField.Items.Add(departments[i].Name);
+                }
+            }
+            else
+            {
+                departments = await depRep.GetDepartmentsFromCompany(chosenCompany);
+                for (int i = 0; i < departments.Count; i++)
+                {
+                    EmployeeDepartment.ComboBoxField.Items.Add(departments[i].Name);
+                }
             }
         }
         //Alle combofieldchanged
         //Når man har valgt et firma sættes id på det firma man har valgt og det bliver muligt at vælge afdelinger relateret til firmaet
         private async void Company_ComboFieldChanged(object sender, EventArgs e)
         {
-            EmployeeDepartment.ComboBoxField.SelectedIndex = -1;
             //Er der valgt et firma sættes employeedepartment comboboks til at være synlig så man kan vælge afdeling
             chosenCompanyId = companies.Find(c => c.Id == companies[EmployeeCompany.ComboBoxField.SelectedIndex].Id).Id;
             setComboDepartmentItems(chosenCompanyId);
@@ -158,19 +192,30 @@ namespace OpgaveGUIAfsluttende.UserControls
             statusLabel.Content = chosenCompanyId;
         }
         //Når der vælges en ny jobtitel sættes id på den pågældende titel med henblik på at kunne opdatere bruger med det id
-        private void EmployeeJobTitle_comboFieldChanged(object sender, EventArgs e)
+        private async void EmployeeJobTitle_comboFieldChanged(object sender, EventArgs e)
         {
             chosenJobTitle = jobtitles.Find(c => c.Id == jobtitles[EmployeeJobTitle.ComboBoxField.SelectedIndex].Id).Id;
             statusLabel.Content = chosenJobTitle;
         }
         //Når man har valgt en afdeling sættes id på det department med henblik på at brugeren modtager denne department
-        private void EmployeeDepartment_comboFieldChanged(object sender, EventArgs e)
+        private async void EmployeeDepartment_comboFieldChanged(object sender, EventArgs e)
         {
-            chosendepartment = departments.Find(c => c.Id == departments[EmployeeDepartment.ComboBoxField.SelectedIndex].Id).Id;
-            statusLabel.Content = chosendepartment;
+            //hvis combofilled er sat til true vil comboboks for departments blive cleared hvilket vil trigger dette event. Derfor
+            //vil der opstå en error hvis den går direkte til at query på departments lige efter den er blevet tømt fordi der ikke vil være
+            //nogle departments at vælge imellem. Derfor sættes combofilled til true oppe i GetComboDepartmentItems således dette 
+            //if statement kan laves som gør at den ikke pr automatik går ind querier på department ved reload efter comboboks er tømt
+            if (derpbool == false)
+            {
+                chosendepartment = departments.Find(c => c.Id == departments[EmployeeDepartment.ComboBoxField.SelectedIndex].Id).Id;
+                statusLabel.Content = chosendepartment;
+            }
+            else
+            {
+                derpbool = false;
+            }
         }
         //Når man har valgt postnumre sættes postnummer property som kan sendes videre til adresse for brugeren
-        private void EmployeeZipCode_comboFieldChanged(object sender, EventArgs e)
+        private async void EmployeeZipCode_comboFieldChanged(object sender, EventArgs e)
         {
             chosenZipCode = zipCodes.Find(c => c.Zipcode == zipCodes[EmployeeZipCode.ComboBoxField.SelectedIndex].Zipcode).Zipcode;
             statusLabel.Content = chosenZipCode;

@@ -21,12 +21,14 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class ComboField : System.Windows.Controls.UserControl
     {
-        public bool selectedChanged;
+        //Laver en counter for at tælle hvor mange gange en comboboks bliver ændret
+        public static int changedCounter;
         //Laver en eventhandler der skal modtage comboboks selectionchanged event
         public event EventHandler comboFieldChanged;
         public ComboField()
         {
             InitializeComponent();
+            changedCounter = 0;
             //Hvis selection på comboboksen ændre sig, skal employeeComboFieldSelectionChanged metoden eksekveres.
             this.ComboBoxField.SelectionChanged += new SelectionChangedEventHandler(this.ComboFieldSelectionChanged);
         }
@@ -34,7 +36,10 @@ namespace OpgaveGUIAfsluttende.UserControls
         protected void ComboFieldSelectionChanged(object sender, EventArgs e)
         {
             //Eksekveres denne metode eksekveres eventet såfremt eventet er sat
+            changedCounter++;
             comboFieldChanged?.Invoke(sender, e);
+
+
         }
         private void ComboField_GotFocus(object sender, RoutedEventArgs e)
         {
