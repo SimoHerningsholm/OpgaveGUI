@@ -22,6 +22,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class UpdateEmployeeFormField : UserControl
     {
+        //deklerere variabler der skal anvendes for at updateemployee modulet fungere
         private string chosenStreet;
         private int chosenAddressId;
         private int employeeId;
@@ -43,6 +44,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         public UpdateEmployeeFormField()
         {
             InitializeComponent();
+            //instanciere objekter der skal anvendes for at updateemployeemodulet fungere
             empRep = new EmployeeRepository();
             companies = new List<Company>();
             compRep = new CompanyRepository();
@@ -122,6 +124,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         public async void updateAddress()
         {
+            //når en employee opdateres skal adressen tilhørende employee opdateres.. Dette burde eventuelt flyttes over i SQL..
             Address updatedAddr = new Address();
             updatedAddr.Id = int.Parse((EmployeeViewerGrid.SelectedCells[3].Column.GetCellContent(EmployeeViewerGrid.SelectedItem) as TextBlock).Text);
             updatedAddr.ZipCode = chosenZipCode;
@@ -130,6 +133,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void GetAddressValues(int addressId)
         {
+            //sætter værdier associeret med adresse på basis af valgt adresse id fra gridview
             chosenAddressId = addressId;
             Address getAddr = await addRep.getAddressFromId(addressId);
             chosenZipCode = getAddr.ZipCode;
@@ -144,6 +148,7 @@ namespace OpgaveGUIAfsluttende.UserControls
                 }
             }
         }
+        //sætter værdi for comboboks med companynavne basis af department id
         public async void GetCompanyFromDepartment(int departmentId)
         {
             Company comp = await compRep.getCompanyFromDepartmentId(departmentId);
@@ -156,6 +161,8 @@ namespace OpgaveGUIAfsluttende.UserControls
                 }
             }
         }
+        //sætter værdi for comboboks med department på basis af department id... har en bug her lige pt der skal fikses pga event på comboboks
+        //i relation med når den loades gennem company comboboks event
         public async void GetDepartmentNameFromid(int departmentId)
         {
             Department dep = await depRep.GetDepartment(departmentId);
@@ -168,6 +175,7 @@ namespace OpgaveGUIAfsluttende.UserControls
                 }
             }
         }
+        //sætter værdi for comboboks med jobtitel på basis af jobtitelid
         public async void GetJobTitleFromId(int jobTitleId)
         {
             JobTitle job = await jobRep.getJobTitle(jobTitleId);

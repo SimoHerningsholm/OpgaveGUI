@@ -22,6 +22,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class CreateEmployeeFormField : UserControl
     {
+        //Deklerere variabler og lister der skal anvends for at oprette en employee
         private int chosenZipCode;
         private int chosenCompanyId;
         private int chosenJobTitle;
@@ -41,6 +42,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         public CreateEmployeeFormField()
         {
             InitializeComponent();
+            //instanciere objekter der skal anvendes for at oprette employee
             companies = new List<Company>();
             compRep = new CompanyRepository();
             depRep = new DepartmentRepository();
@@ -52,6 +54,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             jobtitles = new List<JobTitle>();
             zipCodes = new List<ZipCode>();
             chosenCompanyId = 0;
+            //loader data ind der skal anvendes for at employeeformen er funktionel
             setEmployeeFieldLabels();
             setZipCodeItems();
             setComboJobTitleItems();
@@ -61,7 +64,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         {
             try
             {
-                //Efter objektet er lavet valideres der på om employee er oprettet
+                //Prøver man at oprette employee laves et nyt employee objekt med data i felter som sendes mod datalaget
                 Employee newEmp = new Employee();
                 newEmp.FirstName = EmployeeFirstName.TextBoxField.Text;
                 newEmp.LastName = EmployeeLastName.TextBoxField.Text;
@@ -80,7 +83,9 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async Task<int> getNewAddressId()
         {
+            //opretter adresse på basis af zipcode og street og modtager id på ny adresse
             int addrId = await addRep.CreateAddress(new Address { Street = EmployeeStreet.TextBoxField.Text, ZipCode = chosenZipCode });
+            //er oprettelsen sket successfuldt kan den fortsætte videre og lave ny employee med pågældende adresse....
             if(addrId != 0)
             {
                 return addrId; 

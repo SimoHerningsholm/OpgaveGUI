@@ -22,6 +22,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class DeleteEmployeeFormField : UserControl
     {
+        //deklerere variabler der skal anvendes af deleteemployee modulet
         private EmployeeRepository empRep;
         private List<Employee> empList;
         private int EmployeeId;
@@ -29,13 +30,16 @@ namespace OpgaveGUIAfsluttende.UserControls
         public DeleteEmployeeFormField()
         {
             InitializeComponent();
+            //instanciere objekter der skal anvendes af deleteemployee modulet
             empRep = new EmployeeRepository();
             empList = new List<Employee>();
             EmployeeId = 0;
+            //loader employees ind i liste
             loadEmployees();
         }
         public async void loadEmployees()
         {
+            //læser employees ind i gridview, for at grid ikke bliver overfyldt cleares listen for hver gang en load finder steder
             EmployeeViewGrid.ItemsSource = null;
             empList.Clear();
             empList = await empRep.GetEmployees();
@@ -45,6 +49,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         {
             try
             {
+                //valgt employee sættes til sletning på basis af id. Har det været successfuldt printes meddelelse og employee listen refreshes
                 await empRep.DeleteEmployee(EmployeeId);
                 statusLabel.Content = "Success";
                 loadEmployees();
@@ -57,6 +62,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private void EmployeeViewerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //såfremt itemsource ikke er null (som når den f.eks refreshes) kan employeeid for employee til sletning hentes fra gridview
             if(EmployeeViewGrid.ItemsSource != null)
             {
                 EmployeeId = int.Parse((EmployeeViewGrid.SelectedCells[0].Column.GetCellContent(EmployeeViewGrid.SelectedItem) as TextBlock).Text);

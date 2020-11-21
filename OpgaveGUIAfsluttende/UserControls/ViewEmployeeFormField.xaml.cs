@@ -21,13 +21,14 @@ namespace OpgaveGUIAfsluttende.UserControls
 {
     public partial class ViewEmployeeFormField : UserControl
     {
+        //deklerere variabler der skal anvendes for at viewemployee modulet virker
         private int chosenEmployeeId;
         private JoinedViewRepository joinRep;
         private EmployeeRepository empRep;
         public ViewEmployeeFormField()
         {
             InitializeComponent();
-            //Employee Repository instancieres og emloyees loades i grid og comboboks fyldes med gyldige værdier (når der kommer SQL på)
+            //instanciere objeker der skal anvendes og loader ting der skal anvendes
             joinRep = new JoinedViewRepository();
             empRep = new EmployeeRepository();
             LoadEmployeesIds();
@@ -36,11 +37,12 @@ namespace OpgaveGUIAfsluttende.UserControls
 
         private async void QueryEmployee_Click(object sender, RoutedEventArgs e)
         {
-            //Klikkes der på queryemployee kaldes queryemployee metoden
+            //Vælger man at query en employee hentes employee på basis af id
             EmployeeViewerGrid.ItemsSource = await joinRep.ViewEmployeeWithJoinedData(chosenEmployeeId);
         }
         private async void LoadEmployeesIds()
         {
+            //loader employee id'er ind i comboboks
             List<Employee> emps = new List<Employee>();
             emps = await empRep.GetEmployees();
             for (int i = 0; i < emps.Count; i++)
@@ -52,7 +54,6 @@ namespace OpgaveGUIAfsluttende.UserControls
         {
             //Sætter gridview til at indeholde liste over employees der hentes fra businesslogic laget.
             EmployeeViewerGrid.ItemsSource = await joinRep.ViewEmployeesWithJoinedData();
-          //  EmployeeViewerGrid.ItemsSource = empList;
         }
         private async void QueryOptionsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

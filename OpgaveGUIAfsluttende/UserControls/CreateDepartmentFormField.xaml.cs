@@ -22,6 +22,7 @@ namespace OpgaveGUIAfsluttende.UserControls
     /// </summary>
     public partial class CreateDepartmentFormField : UserControl
     {
+        //deklerere alle variabler der skal anvendes for at oprette department
         private int ChosenCompanyId;
         private CompanyRepository compRep;
         private DepartmentRepository depRep;
@@ -33,6 +34,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         public CreateDepartmentFormField()
         {
             InitializeComponent();
+            //instancere alle objekter der skal anvends for at oprette department
             depRep = new DepartmentRepository();
             compRep = new CompanyRepository();
             empRep = new EmployeeRepository();
@@ -41,6 +43,7 @@ namespace OpgaveGUIAfsluttende.UserControls
             PotentialCompanies = new List<Company>();
             Departments = new List<Department>();
             ChosenCompanyId = 0;
+            //loader ting der skal loades fra start for at oprettelsesmodulet er funktionelt
             SetDepartmentFormLabels();
             loadCompanyCombo();
             LoadBossCombo();
@@ -48,6 +51,7 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void loadDepartments()
         {
+            //læser departments ind i gridview, for at grid ikke bliver overfyldt cleares listen for hver gang en load finder steder
             departmentsGrid.ItemsSource = null;
             Departments.Clear();
             Departments = await depRep.GetDepartments();
@@ -76,12 +80,14 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void SetDepartmentFormLabels()
         {
+            //sætter labels
             DepartmentCompany.ComboFieldLabel.Content = "Company";
             DepartmentName.TextFieldLabel.Content = "Name";
             DepartmentBoss.ComboFieldLabel.Content = "Boss";
         }
         private async void loadCompanyCombo()
         {
+            //modtager companies og loader dem ind i combobox for companies
             PotentialCompanies = await compRep.getCompanies();
             for (int i = 0; i < PotentialCompanies.Count; i++)
             {
@@ -90,20 +96,22 @@ namespace OpgaveGUIAfsluttende.UserControls
         }
         private async void LoadBossCombo()
         {
+            //modtager potentielle bosses og loader dem ind i comboboks for bosses
             potentialBosses = await empRep.GetEmployees();
             for (int i = 0; i < potentialBosses.Count; i++)
             {
                 DepartmentBoss.ComboBoxField.Items.Add(potentialBosses[i].Id.ToString() + " " + potentialBosses[i].FirstName + " " + potentialBosses[i].LastName);
             }
         }
-
         private void DepartmentCompany_comboFieldChanged(object sender, EventArgs e)
         {
+            //querier company id ud fra valgt company i comboboksen med et lambda udtryk
             ChosenCompanyId = PotentialCompanies.Find(c => c.Id == PotentialCompanies[DepartmentCompany.ComboBoxField.SelectedIndex].Id).Id;
         }
 
         private void DepartmentBoss_comboFieldChanged(object sender, EventArgs e)
         {
+            //qurier boss id ud fra valgt boss i comboboksen med et lambdaudtryk
             chosenBoss = potentialBosses.Find(p => p.Id == potentialBosses[DepartmentBoss.ComboBoxField.SelectedIndex].Id);
         }
     }
